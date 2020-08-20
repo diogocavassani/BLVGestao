@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentation", "1.Apresentation", "{9AB1D9FA-2534-4232-B5B1-F71D2C7F7AF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplication", "2.Aplication", "{0B3A31D1-8779-471E-90E8-6B15609803FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{E0E9EE42-3472-4A17-BED5-9BAEEA84FF08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infra", "4.Infra", "{581F476E-308D-46F0-B5A7-658D90282079}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1.Data", "4.1.Data", "{E3C96574-81A4-421F-B24A-E49C2388894D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLVGestao.Domain", "src\BLVGestao.Domain\BLVGestao.Domain.csproj", "{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLVGestao.Data", "src\BLVGestao.Data\BLVGestao.Data.csproj", "{56EE56A7-EFB6-436A-A4F9-39E88AA63C19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EE56A7-EFB6-436A-A4F9-39E88AA63C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EE56A7-EFB6-436A-A4F9-39E88AA63C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EE56A7-EFB6-436A-A4F9-39E88AA63C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EE56A7-EFB6-436A-A4F9-39E88AA63C19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E3C96574-81A4-421F-B24A-E49C2388894D} = {581F476E-308D-46F0-B5A7-658D90282079}
+		{CAD58282-E88C-4B3D-89DB-BCD77DE2ADBA} = {E0E9EE42-3472-4A17-BED5-9BAEEA84FF08}
+		{56EE56A7-EFB6-436A-A4F9-39E88AA63C19} = {E3C96574-81A4-421F-B24A-E49C2388894D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {094EDEE2-ACF9-4D4D-AD9B-60B2E6EEA802}
+	EndGlobalSection
+EndGlobal
