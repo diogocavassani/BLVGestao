@@ -2,8 +2,8 @@
 {
     public enum StatusEnum
     {
-        Pago =1,
+        Pendente = 1,
         Vencido,
-        Pendente
+        Pago
     }
 }

@@ -1,16 +1,20 @@
-﻿namespace BLVGestao.Domain.Model
+﻿using BLVGestao.Domain.Enums;
+
+namespace BLVGestao.Domain.Model
 {
     public class Fornecedor : Pessoa
     {
-        public string RazaoSocial { get; set; }
-        public string NomeFantasia { get; set; }
-        public string Cnpj { get; set; }
-
-
-        public Fornecedor()
+        public Fornecedor(int pessoaId, TipoPessoaEnum tipoPessoa, string razaoSocial, string cnpj, bool ativo) 
+            : base(pessoaId, tipoPessoa, ativo)
         {
-            TipoPessoa = Enums.TipoPessoaEnum.PessoaJuridica;
+            RazaoSocial = razaoSocial;
+            NomeFantasia = NomeFantasia;
+            Cnpj = cnpj;
         }
+
+        public string RazaoSocial { get; private set; }
+        public string NomeFantasia { get; private set; }
+        public string Cnpj { get; private set; }
     }
 
 

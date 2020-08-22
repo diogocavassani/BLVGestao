@@ -2,12 +2,20 @@
 
 namespace BLVGestao.Domain.Model
 {
-    public class GrupoAcesso
+    public class GrupoAcesso : EntityBase
     {
-        public int GrupoAcessoId { get; set; }
-        public string Descricao { get; set; }
-        public string Permissao { get; set; }
-        public bool Ativo { get; set; } = true;
+        public GrupoAcesso(int grupoAcessoId, string descricao, string permissao, bool ativo) 
+            : base(ativo)
+        {
+            GrupoAcessoId = grupoAcessoId;
+            Descricao = descricao;
+            Permissao = permissao;
+        }
+
+        public int GrupoAcessoId { get; private set; }
+        public string Descricao { get; private set; }
+        public string Permissao { get; private set; }
+
         public virtual ICollection<Usuario> Usuarios { get; set; }
 
     }

@@ -8,12 +8,11 @@ namespace Diofab.BLVGestao.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Pessoa> builder)
         {
-
-            builder.HasKey(i => i.Id);
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.HasKey(i => i.PessoaId);
+            builder.Property(p => p.PessoaId).ValueGeneratedOnAdd();
             builder.Property(a => a.Ativo).HasColumnType("bool");
 
-
+            builder.ToTable("Pessoa");
         }
     }
 }

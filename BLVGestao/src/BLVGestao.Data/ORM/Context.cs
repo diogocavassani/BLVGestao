@@ -13,6 +13,9 @@ namespace BLVGestao.Data.ORM
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
+        
+        
+        
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<FormaDePagamento> FormaDePagamento { get; set; }
         
@@ -25,7 +28,7 @@ namespace BLVGestao.Data.ORM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Codigo para pegar todas os Mapeamentos de uma vez. Entretanto os Mapeamentos estão incorretos         
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DiofabDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
 
 
 

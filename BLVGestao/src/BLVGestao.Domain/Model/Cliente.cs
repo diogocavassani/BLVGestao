@@ -1,17 +1,24 @@
 ﻿using System;
+using BLVGestao.Domain.Enums;
 
 namespace BLVGestao.Domain.Model
 {
     public class Cliente : Pessoa
     {
-        public string Nome { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public string Cpf { get; set; }
-        public string Rg { get; set; }
-
-        public Cliente()
+        public Cliente(int pessoaId, TipoPessoaEnum tipoPessoa, string nome, DateTime dataNascimento, string cpf, string rg, bool ativo) 
+            : base(pessoaId, tipoPessoa, ativo)
         {
-            TipoPessoa = Enums.TipoPessoaEnum.PessoaFisica;
+            Nome = nome;
+            DataNascimento = dataNascimento;
+            Cpf = cpf;
+            Rg = rg;            
         }
+
+        public string Nome { get; private set; }
+        public DateTime DataNascimento { get; private set; }
+        public string Cpf { get; private set; }
+        public string Rg { get; private set; }
+
+        
     }
 }

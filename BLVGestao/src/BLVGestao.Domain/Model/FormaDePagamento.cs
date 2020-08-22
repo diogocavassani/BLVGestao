@@ -1,12 +1,17 @@
 ﻿namespace BLVGestao.Domain.Model
 {
-    public class FormaDePagamento
+    public class FormaDePagamento : EntityBase
     {
-        public int FormaDePagamentoId { get; set; }
-        public string Descricao { get; set; }
-        public int PrazoRecebimento { get; set; }
-        public bool Ativo { get; set; } = true;
+        public FormaDePagamento(int formaDePagamentoId, string descricao, int prazoRecebimento, bool ativo) 
+            : base(ativo)
+        {
+            FormaDePagamentoId = formaDePagamentoId;
+            Descricao = descricao;
+            PrazoRecebimento = prazoRecebimento;
+        }
 
-        public FormaDePagamento() { Ativo = true; }
+        public int FormaDePagamentoId { get; private set; }
+        public string Descricao { get; private set; }
+        public int PrazoRecebimento { get; private set; }
     }
 }
