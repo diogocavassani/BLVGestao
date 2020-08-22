@@ -2,7 +2,7 @@
 {
     public class FormaDePagamento
     {
-        public int Id { get; set; }
+        public int FormaDePagamentoId { get; set; }
         public string Descricao { get; set; }
         public int PrazoRecebimento { get; set; }
         public bool Ativo { get; set; } = true;

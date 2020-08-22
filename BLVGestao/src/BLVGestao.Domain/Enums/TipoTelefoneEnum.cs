@@ -1,6 +1,6 @@
 ﻿namespace BLVGestao.Domain.Enums
 {
-    public enum TipoTelefone
+    public enum TipoTelefoneEnum
     {
         TelefoneFixo = 1,
         TelefoneCelular

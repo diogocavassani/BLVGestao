@@ -11,7 +11,7 @@ namespace BLVGestao.Domain.Model
 
         public Cliente()
         {
-            TipoPessoa = Enums.TipoPessoa.PessoaFisica;
+            TipoPessoa = Enums.TipoPessoaEnum.PessoaFisica;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BLVGestao.Domain.Enums
 {
-    public enum TipoPessoa
+    public enum TipoPessoaEnum
     {
         PessoaFisica = 1,
         PessoaJuridica

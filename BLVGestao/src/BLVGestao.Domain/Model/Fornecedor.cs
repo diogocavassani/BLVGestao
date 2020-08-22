@@ -9,7 +9,7 @@
 
         public Fornecedor()
         {
-            TipoPessoa = Enums.TipoPessoa.PessoaJuridica;
+            TipoPessoa = Enums.TipoPessoaEnum.PessoaJuridica;
         }
     }
 

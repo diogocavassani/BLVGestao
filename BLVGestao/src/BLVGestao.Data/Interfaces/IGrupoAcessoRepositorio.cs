@@ -4,6 +4,6 @@ namespace BLVGestao.Data.Interfaces
 {
     public interface IGrupoAcessoRepositorio :  IRepositorioBase<GrupoAcesso>
     {
-
+        
     }
 }

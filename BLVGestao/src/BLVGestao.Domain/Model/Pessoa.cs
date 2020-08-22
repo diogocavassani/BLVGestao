@@ -5,9 +5,9 @@ namespace BLVGestao.Domain.Model
 {
     public abstract class Pessoa
     {
-        public int Id { get; set; }
+        public int PessoaId { get; set; }
         public bool Ativo { get; set; }
-        public TipoPessoa TipoPessoa { get; set; }
+        public TipoPessoaEnum TipoPessoa { get; set; }
         public virtual ICollection<Endereco> Endereco { get; set; }
         public virtual ICollection<Telefone> Telefone { get; set; }
 
