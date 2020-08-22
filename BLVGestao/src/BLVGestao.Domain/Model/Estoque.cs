@@ -12,5 +12,7 @@
         public int EstoqueId { get; private set; }
         public int ProdutoId { get; private set; }
         public decimal Quantidade { get; private set; }
+
+        public Produto Produto { get; set; }
     }
 }

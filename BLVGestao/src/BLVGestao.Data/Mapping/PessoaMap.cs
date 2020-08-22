@@ -12,7 +12,7 @@ namespace Diofab.BLVGestao.Data.Mapping
             builder.Property(p => p.PessoaId).ValueGeneratedOnAdd();
             builder.Property(a => a.Ativo).HasColumnType("bool");
 
-            builder.ToTable("Pessoa");
+            builder.ToTable(nameof(Pessoa));
         }
     }
 }

@@ -30,6 +30,7 @@ namespace BLVGestao.Domain.Model
         public Cliente Cliente { get; set; }
         public FormaDePagamento FormaDePagamento { get; set; }
         public virtual ICollection<ItemVenda> VendaItens { get; set; }
+        public virtual ICollection<ContaReceber> ContasReceber { get; set; }
        
     }
 }

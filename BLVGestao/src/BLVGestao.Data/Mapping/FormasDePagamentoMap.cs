@@ -8,11 +8,10 @@ namespace Diofab.BLVGestao.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<FormaDePagamento> builder)
         {
-            builder.HasKey(fp => fp.Id);
-            builder.Property(fp => fp.Id).ValueGeneratedOnAdd();
+            builder.HasKey(fp => fp.FormaDePagamentoId);
+            builder.Property(fp => fp.FormaDePagamentoId).ValueGeneratedOnAdd();
             builder.Property(fp => fp.Descricao).HasColumnType("varchar(50)").HasMaxLength(50);
             builder.Property(fp => fp.PrazoRecebimento).HasColumnType("int");
-            builder.Property(fp => fp.Ativo).HasColumnType("bool");
         }
     }
 }

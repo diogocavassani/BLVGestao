@@ -19,6 +19,6 @@ namespace BLVGestao.Domain.Model
         public string Cpf { get; private set; }
         public string Rg { get; private set; }
 
-        
+        public ContaReceber ContaReceber { get; set; }
     }
 }
