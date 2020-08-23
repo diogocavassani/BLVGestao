@@ -20,7 +20,7 @@ namespace BLVGestao.Domain.Model
         public int VendaId { get; private set; }
         public int ClienteId { get; private set; }
         public int UsuarioId { get; private set; }
-        public int FormaDePagamentoId { get; set; }
+        public int FormaDePagamentoId { get; private set; }
         public DateTime Data { get; private set; }
         public decimal Total { get; private set; }
         public SituacaoVendaEnum Situacao { get; private set; }
@@ -29,7 +29,7 @@ namespace BLVGestao.Domain.Model
         public Usuario Usuario { get; set; }
         public Cliente Cliente { get; set; }
         public FormaDePagamento FormaDePagamento { get; set; }
-        public virtual ICollection<ItemVenda> VendaItens { get; set; }
+        public virtual ICollection<ItemVenda> ItensVendas { get; set; }
         public virtual ICollection<ContaReceber> ContasReceber { get; set; }
        
     }

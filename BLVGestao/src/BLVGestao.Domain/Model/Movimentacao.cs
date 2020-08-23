@@ -20,6 +20,8 @@ namespace BLVGestao.Domain.Model
         public TipoMovimentoEnum TipoMovimento { get; private set; }
         public DateTime Data { get; private set; }
 
+        public Produto Produto { get; set; }
+
 
 
     }

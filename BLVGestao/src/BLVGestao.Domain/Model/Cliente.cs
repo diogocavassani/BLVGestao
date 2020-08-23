@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BLVGestao.Domain.Enums;
 
 namespace BLVGestao.Domain.Model
@@ -20,5 +21,6 @@ namespace BLVGestao.Domain.Model
         public string Rg { get; private set; }
 
         public ContaReceber ContaReceber { get; set; }
+        public virtual ICollection<Venda> Vendas { get; set; }
     }
 }

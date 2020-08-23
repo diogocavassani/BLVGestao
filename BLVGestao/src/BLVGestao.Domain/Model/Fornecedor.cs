@@ -1,4 +1,5 @@
-﻿using BLVGestao.Domain.Enums;
+﻿using System.Collections.Generic;
+using BLVGestao.Domain.Enums;
 
 namespace BLVGestao.Domain.Model
 {
@@ -15,6 +16,8 @@ namespace BLVGestao.Domain.Model
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string Cnpj { get; private set; }
+
+        public ICollection<Produto> Produtos { get; set; }
     }
 
 

@@ -8,14 +8,14 @@ namespace Diofab.BLVGestao.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Telefone> builder)
         {
-            builder.HasKey(t => t.Id);
-            builder.Property(t => t.Id).ValueGeneratedOnAdd();
+            builder.HasKey(t => t.TelefoneId);
+            builder.Property(t => t.TelefoneId).ValueGeneratedOnAdd();
             builder.Property(n => n.Numero).HasColumnType("varchar(13)").HasMaxLength(13); ;
 
             builder.HasOne(p => p.Pessoa).WithMany(t => t.Telefone)
-                .HasForeignKey(p => p.PessoaId).HasPrincipalKey(t => t.Id);
+                .HasForeignKey(p => p.PessoaId).HasPrincipalKey(t => t.PessoaId);
 
-            builder.ToTable("Telefone");
+            builder.ToTable(nameof(Telefone));
         }
     }
 }

@@ -24,7 +24,8 @@ namespace BLVGestao.Domain.Model
         public decimal ValorVenda { get; private set; }
         public decimal ValorCusto { get; private set; }
 
-        public virtual ICollection<ItemVenda> ItemVenda { get; set; }
+        public virtual ICollection<ItemVenda> ItensVendas { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public ICollection<Movimentacao> Movimentacao{ get; set; }
     }
 }

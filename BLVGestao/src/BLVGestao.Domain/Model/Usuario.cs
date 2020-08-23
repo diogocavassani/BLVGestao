@@ -1,14 +1,22 @@
-﻿namespace BLVGestao.Domain.Model
+﻿using System.Collections.Generic;
+
+namespace BLVGestao.Domain.Model
 {
-    public class Usuario
+    public class Usuario : EntityBase
     {
-        public int UsuarioId { get; set; }
-        public string Login { get; set; }
-        public string Senha { get; set; }
+        public Usuario(int usuarioId, int grupoAcessoId, string login, string senha, bool ativo) : base(ativo)
+        {
+            UsuarioId = usuarioId;
+            GrupoAcessoId = grupoAcessoId;
+            Login = login;
+            Senha = senha;
+        }
+
+        public int UsuarioId { get; private set; }
+        public int GrupoAcessoId { get; set; }
+        public string Login { get; private set; }
+        public string Senha { get; private set; }
         public virtual GrupoAcesso GrupoAcesso { get; set; }
-        public bool Ativo { get; set; }
-
-        public Usuario() { Ativo = true; }
-
+        public virtual ICollection<Venda> Vendas { get; set; }
     }
 }

@@ -8,11 +8,16 @@ namespace Diofab.BLVGestao.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.Property(d => d.Descricao).HasColumnType("varchar(50)").HasMaxLength(50); ;
-            builder.Property(u => u.Unidade).HasColumnType("varchar(3)").HasMaxLength(3); ;
-            builder.Property(vv => vv.ValorVenda).HasColumnType("decimal");
-            builder.Property(vc => vc.ValorCusto).HasColumnType("decimal");
+            builder.Property(d => d.Descricao).HasColumnType("varchar(50)").HasMaxLength(50).IsRequired(); 
+            builder.Property(u => u.Unidade).HasColumnType("varchar(3)").HasMaxLength(3).IsRequired(); ;
+            builder.Property(vv => vv.ValorVenda).HasColumnType("decimal(10,2)").IsRequired();
+            builder.Property(vc => vc.ValorCusto).HasColumnType("decimal(10,2)").IsRequired();
             builder.Property(a => a.Ativo).HasColumnType("bool");
+
+            builder.HasOne(p => p.Fornecedor).WithMany(f => f.Produtos)
+                .HasForeignKey(p => p.FornecedorId);
+
+            builder.ToTable(nameof(Produto));
 
 
         }
