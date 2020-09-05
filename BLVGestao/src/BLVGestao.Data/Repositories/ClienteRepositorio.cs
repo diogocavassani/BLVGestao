@@ -1,13 +1,15 @@
 ﻿using BLVGestao.Data.Interfaces;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BLVGestao.Data.Repositories
 {
-    public class ClienteRepositorio : IRepositorioBase<Cliente>, IClienteRepositorio
+    public class ClienteRepositorio : IClienteRepositorio
     {
         private readonly Context _context;
         public ClienteRepositorio(Context context)
@@ -15,34 +17,53 @@ namespace BLVGestao.Data.Repositories
             _context = context;
         }
 
-        public Task Alterar(Cliente entity)
+        async public Task<ICollection<Cliente>> ListarTodos()
         {
-            throw new NotImplementedException();
+            return await _context.Clientes.Where(c => c.Ativo == true).AsNoTracking().ToListAsync();
         }
 
-        public Task<IEnumerable<Cliente>> ConsultarPorCpf(string cpf)
+        async public Task<Cliente> ListarPorId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.PessoaId == id);
         }
 
-        public Task<IEnumerable<Cliente>> ConsultarPorNome(string nome)
+        async public Task Inserir(Cliente cliente)
         {
-            throw new NotImplementedException();
+             _context.Clientes.Add(cliente);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Inserir(Cliente entity)
+        async public Task Alterar(Cliente cliente)
         {
-            throw new NotImplementedException();
+              _context.Update(cliente);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Cliente>> ListarPorId(int Id)
+        async public Task<ICollection<Cliente>> ConsultarPorNome(string nome)
         {
-            throw new NotImplementedException();
+            return await _context.Clientes.Where(c => c.Nome == nome).AsNoTracking().ToListAsync();
         }
 
-        public Task<IEnumerable<Cliente>> ListarTodos()
+        async public Task<Cliente> ConsultarPorCpf(string cpf)
         {
-            throw new NotImplementedException();
+            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Cpf == cpf);
         }
+
+        async public Task Inativar(Cliente cliente)
+        {
+            cliente.Inativar();
+            _context.Clientes.Update(cliente);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        
+
+
     }
 }

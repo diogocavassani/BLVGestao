@@ -6,7 +6,7 @@ namespace BLVGestao.Data.Interfaces
 {
     public interface IClienteRepositorio : IRepositorioBase<Cliente>
     {
-        Task<IEnumerable<Cliente>> ConsultarPorNome(string nome);
-        Task<IEnumerable<Cliente>> ConsultarPorCpf(string cpf);
+        Task<ICollection<Cliente>> ConsultarPorNome(string nome);
+        Task<Cliente> ConsultarPorCpf(string cpf);
     }
 }

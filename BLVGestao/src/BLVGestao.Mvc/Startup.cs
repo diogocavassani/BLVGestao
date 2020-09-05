@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BLVGestao.Data.Interfaces;
 using BLVGestao.Data.ORM;
+using BLVGestao.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +24,8 @@ namespace BLVGestao.Mvc
         {
             services.AddControllersWithViews();
             services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("Context")));
+            
+            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
