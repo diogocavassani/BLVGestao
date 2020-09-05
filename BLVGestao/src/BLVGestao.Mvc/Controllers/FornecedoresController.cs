@@ -7,34 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
+using BLVGestao.Data.Interfaces;
 
 namespace BLVGestao.Mvc.Controllers
 {
     public class FornecedoresController : Controller
     {
-        private readonly Context _context;
+        private readonly IFornecedorRepositorio _fornecedorRepositorio;
 
-        public FornecedoresController(Context context)
+        public FornecedoresController(IFornecedorRepositorio fornecedorRepositorio)
         {
-            _context = context;
+            _fornecedorRepositorio = fornecedorRepositorio;
         }
 
         // GET: Fornecedores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Fornecedores.ToListAsync());
+            return View(await _fornecedorRepositorio.ListarTodos());
         }
 
         // GET: Fornecedores/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var fornecedor = await _context.Fornecedores
-                .FirstOrDefaultAsync(m => m.PessoaId == id);
+            var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
             if (fornecedor == null)
             {
                 return NotFound();
@@ -50,30 +45,22 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // POST: Fornecedores/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RazaoSocial,NomeFantasia,Cnpj,PessoaId,TipoPessoa,Ativo")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(fornecedor);
-                await _context.SaveChangesAsync();
+                await _fornecedorRepositorio.Inserir(fornecedor);
                 return RedirectToAction(nameof(Index));
             }
             return View(fornecedor);
         }
 
         // GET: Fornecedores/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var fornecedor = await _context.Fornecedores.FindAsync(id);
+            var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
             if (fornecedor == null)
             {
                 return NotFound();
@@ -82,8 +69,6 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // POST: Fornecedores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RazaoSocial,NomeFantasia,Cnpj,PessoaId,TipoPessoa,Ativo")] Fornecedor fornecedor)
@@ -97,8 +82,7 @@ namespace BLVGestao.Mvc.Controllers
             {
                 try
                 {
-                    _context.Update(fornecedor);
-                    await _context.SaveChangesAsync();
+                    await _fornecedorRepositorio.Alterar(fornecedor);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +101,11 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Fornecedores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var fornecedor = await _context.Fornecedores
-                .FirstOrDefaultAsync(m => m.PessoaId == id);
+
+            var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
             if (fornecedor == null)
             {
                 return NotFound();
@@ -139,15 +119,18 @@ namespace BLVGestao.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var fornecedor = await _context.Fornecedores.FindAsync(id);
-            _context.Fornecedores.Remove(fornecedor);
-            await _context.SaveChangesAsync();
+            var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
+            fornecedor.Inativar();
+            await _fornecedorRepositorio.Alterar(fornecedor);
             return RedirectToAction(nameof(Index));
         }
 
         private bool FornecedorExists(int id)
         {
-            return _context.Fornecedores.Any(e => e.PessoaId == id);
+            var cliente = _fornecedorRepositorio.ListarPorId(id);
+            if(cliente == null)
+                return false;
+            return true;
         }
     }
 }

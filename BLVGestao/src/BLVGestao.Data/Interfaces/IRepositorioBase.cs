@@ -10,8 +10,5 @@ namespace BLVGestao.Data.Interfaces
         Task<T> ListarPorId(int id);
         Task Inserir(T entity);
         Task Alterar(T entity);
-         //Task Inativar(T entity);
-
-
     }
 }

@@ -1,0 +1,63 @@
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-5">
+    <a asp-controller="Home" asp-action="Index" class="brand-link">
+        <img src="~/logo.png" alt="Boulevard Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">FarmaFlex</span>
+    </a>
+
+    <div class="sidebar">
+        <nav class="mt-auto">
+            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item flex-row">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Início
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Clientes" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Clientes
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Pedido" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <p>
+                            Pedidos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a asp-controller="Produto" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>
+                            Produtos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cogs "></i>
+                        <p>
+                            Configuração
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+</aside>

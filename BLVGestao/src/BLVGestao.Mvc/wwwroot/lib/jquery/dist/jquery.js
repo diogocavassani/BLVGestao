@@ -9217,9 +9217,9 @@ jQuery.extend( {
 		}
 
 		// Callback for when everything is done
-		function done( status, nativeStatusText, responses, headers ) {
+		function done( status, nativStatusEnumText, responses, headers ) {
 			var isSuccess, success, error, response, modified,
-				statusText = nativeStatusText;
+				statusText = nativStatusEnumText;
 
 			// Ignore repeat invocations
 			if ( completed ) {
@@ -9298,7 +9298,7 @@ jQuery.extend( {
 
 			// Set data for the fake xhr object
 			jqXHR.status = status;
-			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
+			jqXHR.statusText = ( nativStatusEnumText || statusText ) + "";
 
 			// Success/Error
 			if ( isSuccess ) {
