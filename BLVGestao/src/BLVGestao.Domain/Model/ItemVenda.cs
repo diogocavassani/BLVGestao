@@ -2,8 +2,8 @@
 {
     public class ItemVenda : EntityBase
     {
-        public ItemVenda(int vendaId, int produtoId, decimal quantidade, decimal valorTotal, bool ativo) 
-            : base(ativo)
+        public ItemVenda(int vendaId, int produtoId, decimal quantidade, decimal valorTotal) 
+
         {
             VendaId = vendaId;
             ProdutoId = produtoId;

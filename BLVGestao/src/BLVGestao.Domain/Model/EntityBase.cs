@@ -5,11 +5,11 @@ namespace BLVGestao.Domain.Model
     //TODO:Verificar necessidade desta classe
     public class EntityBase
     {
-        public EntityBase(bool ativo)
+        public EntityBase()
         {
-            Ativo = ativo;
+            Ativo = true;
         }
-        public bool Ativo { get; private set; }
+        public bool Ativo { get; protected set; }
 
         public void Inativar()
         {

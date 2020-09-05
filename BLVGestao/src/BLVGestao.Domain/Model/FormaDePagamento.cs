@@ -4,8 +4,7 @@ namespace BLVGestao.Domain.Model
 {
     public class FormaDePagamento : EntityBase
     {
-        public FormaDePagamento(int formaDePagamentoId, string descricao, int prazoRecebimento, bool ativo) 
-            : base(ativo)
+        public FormaDePagamento(int formaDePagamentoId, string descricao, int prazoRecebimento)
         {
             FormaDePagamentoId = formaDePagamentoId;
             Descricao = descricao;

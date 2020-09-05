@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace BLVGestao.Data.Interfaces
 {
-    public interface IRepositorioBase<TEntity> : IDisposable
+    public interface IRepositorioBase<T> : IDisposable
     {
-        Task<ICollection<TEntity>> ListarTodos();
-        Task<TEntity> ListarPorId(int id);
-        Task Inserir(TEntity entity);
-        Task Alterar(TEntity entity);
-        Task Inativar(TEntity entity);
+        Task<ICollection<T>> ListarTodos();
+        Task<T> ListarPorId(int id);
+        Task Inserir(T entity);
+        Task Alterar(T entity);
+         //Task Inativar(T entity);
 
 
     }

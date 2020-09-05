@@ -4,8 +4,7 @@ namespace BLVGestao.Domain.Model
 {
     public class Telefone : EntityBase
     {
-        public Telefone(int telefoneId, int pessoaId, int numero, TipoTelefoneEnum tipoTelefone, bool ativo)
-            :base(ativo)
+        public Telefone(int telefoneId, int pessoaId, int numero, TipoTelefoneEnum tipoTelefone)
         {
             TelefoneId = telefoneId;
             PessoaId = pessoaId;

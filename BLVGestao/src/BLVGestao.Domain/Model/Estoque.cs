@@ -2,8 +2,8 @@
 {
     public class Estoque : EntityBase
     {
-        public Estoque(int estoqueId, int produtoId, decimal quantidade, bool ativo)
-            : base(ativo)
+        public Estoque(int estoqueId, int produtoId, decimal quantidade)
+
         {
             EstoqueId = estoqueId;
             ProdutoId = produtoId;

@@ -4,8 +4,7 @@ namespace BLVGestao.Domain.Model
 {
     public class Produto : EntityBase
     {
-        public Produto(int produtoId, int fornecedorId, string descricao, string observacao,  string unidade, decimal valorVenda, decimal valorCusto, bool ativo) 
-            : base(ativo)
+        public Produto(int produtoId, int fornecedorId, string descricao, string observacao,  string unidade, decimal valorVenda, decimal valorCusto) 
         {
             ProdutoId = produtoId;
             FornecedorId = fornecedorId;

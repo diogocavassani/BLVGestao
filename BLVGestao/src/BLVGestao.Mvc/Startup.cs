@@ -26,6 +26,7 @@ namespace BLVGestao.Mvc
             services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("Context")));
             
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+            services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +53,7 @@ namespace BLVGestao.Mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Clientes}/{action=Index}/{id?}");
             });
         }
     }

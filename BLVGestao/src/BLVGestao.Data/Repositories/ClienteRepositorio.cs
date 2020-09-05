@@ -9,39 +9,12 @@ using System.Threading.Tasks;
 
 namespace BLVGestao.Data.Repositories
 {
-    public class ClienteRepositorio : IClienteRepositorio
+    public class ClienteRepositorio : RepositorioBase<Cliente>, IClienteRepositorio
     {
-        private readonly Context _context;
-        public ClienteRepositorio(Context context)
-        {
-            _context = context;
-        }
 
-        async public Task<ICollection<Cliente>> ListarTodos()
+        public ClienteRepositorio(Context context) : base(context)
         {
-            return await _context.Clientes.Where(c => c.Ativo == true).AsNoTracking().ToListAsync();
-        }
 
-        async public Task<Cliente> ListarPorId(int id)
-        {
-            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.PessoaId == id);
-        }
-
-        async public Task Inserir(Cliente cliente)
-        {
-             _context.Clientes.Add(cliente);
-            await _context.SaveChangesAsync();
-        }
-
-        async public Task Alterar(Cliente cliente)
-        {
-              _context.Update(cliente);
-            await _context.SaveChangesAsync();
-        }
-
-        async public Task<ICollection<Cliente>> ConsultarPorNome(string nome)
-        {
-            return await _context.Clientes.Where(c => c.Nome == nome).AsNoTracking().ToListAsync();
         }
 
         async public Task<Cliente> ConsultarPorCpf(string cpf)
@@ -49,21 +22,16 @@ namespace BLVGestao.Data.Repositories
             return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Cpf == cpf);
         }
 
-        async public Task Inativar(Cliente cliente)
+        async public Task<ICollection<Cliente>> ConsultarPorNome(string nome)
         {
-            cliente.Inativar();
-            _context.Clientes.Update(cliente);
-            await _context.SaveChangesAsync();
+            return await _context.Clientes.Where(c => c.Nome == nome).AsNoTracking().ToListAsync();
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        
-
-
+        //async public Task Inativar(Cliente cliente)
+        //{
+        //    cliente.Inativar();
+        //    _context.Clientes.Update(cliente);
+        //    await _context.SaveChangesAsync();
+        //}
     }
 }

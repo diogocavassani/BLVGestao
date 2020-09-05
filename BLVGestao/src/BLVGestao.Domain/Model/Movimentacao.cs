@@ -6,8 +6,7 @@ namespace BLVGestao.Domain.Model
     //TODO:Verificar esta classe
     public class Movimentacao : EntityBase
     {
-        public Movimentacao(int movimentacaoId, int produtoId, TipoMovimentoEnum tipoMovimento, DateTime data, bool ativo) 
-            : base(ativo)
+        public Movimentacao(int movimentacaoId, int produtoId, TipoMovimentoEnum tipoMovimento, DateTime data) 
         {
             MovimentacaoId = movimentacaoId;
             ProdutoId = produtoId;

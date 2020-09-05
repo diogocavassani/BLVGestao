@@ -43,7 +43,7 @@ namespace BLVGestao.Mvc.Controllers
         {
             return View();
         }
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Cliente cliente)
@@ -99,15 +99,15 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // POST: Clientes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var cliente =  await _clienteRepositorio.ListarPorId(id);
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var cliente =  await _clienteRepositorio.ListarPorId(id);
 
-            await _clienteRepositorio.Inativar(cliente);
-            return RedirectToAction(nameof(Index));
-        }
+        //    await _clienteRepositorio.Inativar(cliente);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
     }
 }

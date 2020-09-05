@@ -4,8 +4,7 @@ namespace BLVGestao.Domain.Model
 {
     public class GrupoAcesso : EntityBase
     {
-        public GrupoAcesso(int grupoAcessoId, string descricao, string permissao, bool ativo) 
-            : base(ativo)
+        public GrupoAcesso(int grupoAcessoId, string descricao, string permissao) 
         {
             GrupoAcessoId = grupoAcessoId;
             Descricao = descricao;

@@ -5,12 +5,14 @@ namespace BLVGestao.Domain.Model
 {
     public class Fornecedor : Pessoa
     {
-        public Fornecedor(int pessoaId, TipoPessoaEnum tipoPessoa, string razaoSocial, string cnpj, bool ativo) 
-            : base(pessoaId, tipoPessoa, ativo)
+        public Fornecedor(int pessoaId, string razaoSocial, string cnpj)
+            : base(pessoaId)
         {
             RazaoSocial = razaoSocial;
             NomeFantasia = NomeFantasia;
             Cnpj = cnpj;
+            TipoPessoa = TipoPessoaEnum.PessoaFisica;
+
         }
 
         public string RazaoSocial { get; private set; }

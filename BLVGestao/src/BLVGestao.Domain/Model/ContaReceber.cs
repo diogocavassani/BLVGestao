@@ -4,8 +4,8 @@ namespace BLVGestao.Domain.Model
 {
     public class ContaReceber : EntityBase
     {
-        public ContaReceber(int contaReceberId, int vendaId, int clienteId, decimal valorTotal, StatusEnum status, bool ativo)
-            : base(ativo)
+        public ContaReceber(int contaReceberId, int vendaId, int clienteId, decimal valorTotal, StatusEnum status)
+
         {
             ContaReceberId = contaReceberId;
             VendaId = vendaId;

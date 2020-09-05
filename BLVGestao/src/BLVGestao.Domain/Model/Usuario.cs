@@ -4,7 +4,7 @@ namespace BLVGestao.Domain.Model
 {
     public class Usuario : EntityBase
     {
-        public Usuario(int usuarioId, int grupoAcessoId, string login, string senha, bool ativo) : base(ativo)
+        public Usuario(int usuarioId, int grupoAcessoId, string login, string senha) 
         {
             UsuarioId = usuarioId;
             GrupoAcessoId = grupoAcessoId;

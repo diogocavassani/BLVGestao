@@ -6,13 +6,14 @@ namespace BLVGestao.Domain.Model
 {
     public class Cliente : Pessoa
     {
-        public Cliente(int pessoaId, TipoPessoaEnum tipoPessoa, string nome, DateTime dataNascimento, string cpf, string rg, bool ativo) 
-            : base(pessoaId, tipoPessoa, ativo)
+        public Cliente(int pessoaId, string nome, DateTime dataNascimento, string cpf, string rg)
+            : base(pessoaId)
         {
             Nome = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
-            Rg = rg;            
+            Rg = rg;
+            TipoPessoa = TipoPessoaEnum.PessoaFisica;
         }
 
         public string Nome { get; private set; }

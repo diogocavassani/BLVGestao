@@ -2,8 +2,8 @@
 {
     public class Endereco : EntityBase
     {
-        public Endereco(int enderecoId, int pessoaId, string logradouro, string numero, string bairro, bool ativo)
-            : base(ativo)
+        public Endereco(int enderecoId, int pessoaId, string logradouro, string numero, string bairro)
+
         {
             EnderecoId = enderecoId;
             PessoaId = pessoaId;
