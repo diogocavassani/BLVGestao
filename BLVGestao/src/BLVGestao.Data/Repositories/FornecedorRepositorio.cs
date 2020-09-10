@@ -26,5 +26,14 @@ namespace BLVGestao.Data.Repositories
         {
             return await _context.Fornecedores.Where(f => f.NomeFantasia == nomeFantasia).AsNoTracking().ToListAsync();
         }
+        async public Task<Fornecedor> ConsultarPorIdCompleto(int id)
+        {
+            var telefones = _context.Telefones.Where(t => t.PessoaId == id).AsNoTracking().ToList();
+            var enderecos = _context.Enderecos.Where(e => e.PessoaId == id).AsNoTracking().ToList();
+            var fornecedor = await _context.Fornecedores.AsNoTracking().FirstAsync(c => c.PessoaId == id);
+            fornecedor.Telefones = telefones;
+            fornecedor.Enderecos = enderecos;
+            return fornecedor;
+        }
     }
 }

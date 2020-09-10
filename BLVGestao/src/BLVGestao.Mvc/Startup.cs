@@ -23,8 +23,10 @@ namespace BLVGestao.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("Context")));
-            
+            services.AddCors();
+            services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("ContextLocal")));
+
+            services.AddMemoryCache();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
         }
@@ -46,6 +48,7 @@ namespace BLVGestao.Mvc
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthorization();
 

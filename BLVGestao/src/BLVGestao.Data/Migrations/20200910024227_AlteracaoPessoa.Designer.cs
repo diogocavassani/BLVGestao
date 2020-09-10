@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BLVGestao.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200828222640_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200910024227_AlteracaoPessoa")]
+    partial class AlteracaoPessoa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,9 +72,15 @@ namespace BLVGestao.Data.Migrations
                     b.Property<int>("PessoaId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PessoaId1")
+                        .HasColumnType("int");
+
                     b.HasKey("EnderecoId");
 
                     b.HasIndex("PessoaId");
+
+                    b.HasIndex("PessoaId1")
+                        .IsUnique();
 
                     b.ToTable("Endereco");
                 });
@@ -271,12 +277,18 @@ namespace BLVGestao.Data.Migrations
                     b.Property<int>("PessoaId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PessoaId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("TipoTelefone")
                         .HasColumnType("int");
 
                     b.HasKey("TelefoneId");
 
                     b.HasIndex("PessoaId");
+
+                    b.HasIndex("PessoaId1")
+                        .IsUnique();
 
                     b.ToTable("Telefone");
                 });
@@ -402,10 +414,14 @@ namespace BLVGestao.Data.Migrations
             modelBuilder.Entity("BLVGestao.Domain.Model.Endereco", b =>
                 {
                     b.HasOne("BLVGestao.Domain.Model.Pessoa", "Pessoa")
-                        .WithMany("Endereco")
+                        .WithMany("Enderecos")
                         .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BLVGestao.Domain.Model.Pessoa", null)
+                        .WithOne("Endereco")
+                        .HasForeignKey("BLVGestao.Domain.Model.Endereco", "PessoaId1");
                 });
 
             modelBuilder.Entity("BLVGestao.Domain.Model.Estoque", b =>
@@ -453,10 +469,14 @@ namespace BLVGestao.Data.Migrations
             modelBuilder.Entity("BLVGestao.Domain.Model.Telefone", b =>
                 {
                     b.HasOne("BLVGestao.Domain.Model.Pessoa", "Pessoa")
-                        .WithMany("Telefone")
+                        .WithMany("Telefones")
                         .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BLVGestao.Domain.Model.Pessoa", null)
+                        .WithOne("Telefone")
+                        .HasForeignKey("BLVGestao.Domain.Model.Telefone", "PessoaId1");
                 });
 
             modelBuilder.Entity("BLVGestao.Domain.Model.Usuario", b =>

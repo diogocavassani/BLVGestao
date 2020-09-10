@@ -14,12 +14,12 @@ namespace BLVGestao.Mvc.Controllers
     public class ClientesController : Controller
     {
         private readonly IClienteRepositorio _clienteRepositorio;
-        private readonly Cliente _cliente;
+        //private readonly Cliente _cliente;
 
         public ClientesController(IClienteRepositorio clienteRepositorio)
         {
             _clienteRepositorio = clienteRepositorio;
-            _cliente = new Cliente(0, null, DateTime.Now, null, null);
+            //_cliente = new Cliente(0, null, DateTime.Now, null, null);
         }
 
         // GET: Clientes
@@ -31,7 +31,7 @@ namespace BLVGestao.Mvc.Controllers
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var cliente = await _clienteRepositorio.ListarPorId(id);
+            var cliente = await _clienteRepositorio.ConsultarPorIdCompleto(id);
             if (cliente == null)
             {
                 return NotFound();
@@ -49,7 +49,7 @@ namespace BLVGestao.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Cliente cliente)
         {
-            
+
             await _clienteRepositorio.Inserir(cliente);
             
             return View(cliente);

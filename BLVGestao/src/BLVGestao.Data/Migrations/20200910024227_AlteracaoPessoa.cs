@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BLVGestao.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class AlteracaoPessoa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -92,7 +92,8 @@ namespace BLVGestao.Data.Migrations
                     PessoaId = table.Column<int>(nullable: false),
                     Logradouro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
                     Numero = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
-                    Bairro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
+                    Bairro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
+                    PessoaId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,6 +104,12 @@ namespace BLVGestao.Data.Migrations
                         principalTable: "Pessoa",
                         principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Endereco_Pessoa_PessoaId1",
+                        column: x => x.PessoaId1,
+                        principalTable: "Pessoa",
+                        principalColumn: "PessoaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,7 +146,8 @@ namespace BLVGestao.Data.Migrations
                     Ativo = table.Column<bool>(nullable: false),
                     PessoaId = table.Column<int>(nullable: false),
                     Numero = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false),
-                    TipoTelefone = table.Column<int>(nullable: false)
+                    TipoTelefone = table.Column<int>(nullable: false),
+                    PessoaId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -150,6 +158,12 @@ namespace BLVGestao.Data.Migrations
                         principalTable: "Pessoa",
                         principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Telefone_Pessoa_PessoaId1",
+                        column: x => x.PessoaId1,
+                        principalTable: "Pessoa",
+                        principalColumn: "PessoaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -299,6 +313,12 @@ namespace BLVGestao.Data.Migrations
                 column: "PessoaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Endereco_PessoaId1",
+                table: "Endereco",
+                column: "PessoaId1",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Estoque_ProdutoId",
                 table: "Estoque",
                 column: "ProdutoId");
@@ -322,6 +342,12 @@ namespace BLVGestao.Data.Migrations
                 name: "IX_Telefone_PessoaId",
                 table: "Telefone",
                 column: "PessoaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Telefone_PessoaId1",
+                table: "Telefone",
+                column: "PessoaId1",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_GrupoAcessoId",

@@ -1,16 +1,31 @@
-﻿@model IEnumerable<BLVGestao.Domain.Model.Cliente>
+﻿
+@model IEnumerable<BLVGestao.Domain.Model.Cliente>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-        <h1>Index</h1>
+    <div class="content-header container-fluid row mb-2 col-sm-6">
+        <h1 class="m-0 text-dark">Clientes</h1>
+        <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="Codigo">
+            <input class="form-control form-control-navbar" type="search" placeholder="Nome" aria-label="Nome">
+            <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </div>
+        <button class="float-right">
+            <a class="fa fa-plus" asp-action="Create">Novo</a>
+        </button>
+    </div>
+        
 
         <p>
-            <a asp-action="Create">Create New</a>
+            
         </p>
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>
@@ -26,12 +41,8 @@
                         @Html.DisplayNameFor(model => model.Rg)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TipoPessoa)
+                        Ações
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Ativo)
-                    </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -49,12 +60,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Rg)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoPessoa)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ativo)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |

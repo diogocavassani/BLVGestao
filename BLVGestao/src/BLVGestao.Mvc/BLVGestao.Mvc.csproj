@@ -53,4 +53,8 @@
     <ProjectReference Include="..\BLVGestao.Data\BLVGestao.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\Cabecalho\" />
+  </ItemGroup>
+
 </Project>

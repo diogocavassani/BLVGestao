@@ -11,5 +11,10 @@
     <WebStackScaffolding_DbContextTypeFullName>BLVGestao.Data.ORM.Context</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <View_SelectedScaffolderID>RazorViewScaffolder</View_SelectedScaffolderID>
+    <View_SelectedScaffolderCategoryPath>root/View</View_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
+    <_SelectedScaffolderID>ModelBasedRazorPageScaffolder</_SelectedScaffolderID>
+    <_SelectedScaffolderCategoryPath>root/Common</_SelectedScaffolderCategoryPath>
   </PropertyGroup>
 </Project>

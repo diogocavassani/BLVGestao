@@ -11,10 +11,14 @@ namespace BLVGestao.Domain.Model
             Numero = numero;
             TipoTelefone = tipoTelefone;          
         }
-        public int TelefoneId { get; private set; }
-        public int PessoaId { get; private set; }
-        public int Numero { get; private set; }
-        public TipoTelefoneEnum TipoTelefone { get; private set; }
+        public Telefone()
+        {
+
+        }
+        public int TelefoneId { get; set; }
+        public int PessoaId { get; set; }
+        public int Numero { get; set; }
+        public TipoTelefoneEnum TipoTelefone { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
 

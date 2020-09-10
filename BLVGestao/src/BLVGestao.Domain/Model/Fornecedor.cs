@@ -5,8 +5,8 @@ namespace BLVGestao.Domain.Model
 {
     public class Fornecedor : Pessoa
     {
-        public Fornecedor(int pessoaId, string razaoSocial, string cnpj)
-            : base(pessoaId)
+        public Fornecedor(/*int pessoaId,*/ string razaoSocial, string cnpj)
+            //: base(pessoaId)
         {
             RazaoSocial = razaoSocial;
             NomeFantasia = NomeFantasia;
@@ -14,10 +14,14 @@ namespace BLVGestao.Domain.Model
             TipoPessoa = TipoPessoaEnum.PessoaFisica;
 
         }
+        public Fornecedor()
+        {
+            TipoPessoa = TipoPessoaEnum.PessoaFisica;
+        }
 
-        public string RazaoSocial { get; private set; }
-        public string NomeFantasia { get; private set; }
-        public string Cnpj { get; private set; }
+        public string RazaoSocial { get; set; }
+        public string NomeFantasia { get; set; }
+        public string Cnpj { get; set; }
 
         public ICollection<Produto> Produtos { get; set; }
     }

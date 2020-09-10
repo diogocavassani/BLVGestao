@@ -12,7 +12,7 @@ namespace Diofab.BLVGestao.Data.Mapping
             builder.Property(t => t.TelefoneId).ValueGeneratedOnAdd();
             builder.Property(n => n.Numero).HasColumnType("varchar(13)").HasMaxLength(13); ;
 
-            builder.HasOne(p => p.Pessoa).WithMany(t => t.Telefone)
+            builder.HasOne(p => p.Pessoa).WithMany(t => t.Telefones)
                 .HasForeignKey(p => p.PessoaId).HasPrincipalKey(t => t.PessoaId);
 
             builder.ToTable(nameof(Telefone));

@@ -6,8 +6,8 @@ namespace BLVGestao.Domain.Model
 {
     public class Cliente : Pessoa
     {
-        public Cliente(int pessoaId, string nome, DateTime dataNascimento, string cpf, string rg)
-            : base(pessoaId)
+        public Cliente(/*int pessoaId,*/ string nome, DateTime dataNascimento, string cpf, string rg)
+            //: base(pessoaId)
         {
             Nome = nome;
             DataNascimento = dataNascimento;
@@ -16,10 +16,14 @@ namespace BLVGestao.Domain.Model
             TipoPessoa = TipoPessoaEnum.PessoaFisica;
         }
 
-        public string Nome { get; private set; }
-        public DateTime DataNascimento { get; private set; }
-        public string Cpf { get; private set; }
-        public string Rg { get; private set; }
+        public Cliente()
+        {
+            TipoPessoa = TipoPessoaEnum.PessoaFisica;
+        }
+        public string Nome { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public string Cpf { get; set; }
+        public string Rg { get; set; }
 
         public ContaReceber ContaReceber { get; set; }
         public virtual ICollection<Venda> Vendas { get; set; }

@@ -29,7 +29,7 @@ namespace BLVGestao.Mvc.Controllers
         // GET: Fornecedores/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
+            var fornecedor = await _fornecedorRepositorio.ConsultarPorIdCompleto(id);
             if (fornecedor == null)
             {
                 return NotFound();
