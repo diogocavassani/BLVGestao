@@ -14,7 +14,7 @@ namespace BLVGestao.Data.Mapping
             builder.Property(e => e.Numero).HasColumnType("varchar(10)").HasMaxLength(10); ;
             builder.Property(e => e.Bairro).HasColumnType("varchar(30)").HasMaxLength(30); ;
 
-            //TODO: Relacionamento
+
             builder.HasOne(p => p.Pessoa).WithMany(e => e.Enderecos)
                 .HasForeignKey(e => e.PessoaId);
             

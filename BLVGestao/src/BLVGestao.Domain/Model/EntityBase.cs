@@ -2,7 +2,7 @@ using System;
 
 namespace BLVGestao.Domain.Model
 {
-    //TODO:Verificar necessidade desta classe
+
     public class EntityBase
     {
         public EntityBase()

@@ -8,6 +8,7 @@ namespace BLVGestao.Data.Interfaces
     {
         Task<ICollection<Fornecedor>> ConsultarPorNomeFantasia(string nomeFantasia);
         Task<Fornecedor> ConsultarPorCnpj(string cnpj);
-        Task<Fornecedor> ConsultarPorIdCompleto(int id);
+        Task<ICollection<Fornecedor>> ListarAtivos();
+
     }
 }

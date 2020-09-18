@@ -19,21 +19,17 @@ namespace BLVGestao.Data.Repositories
 
         async public Task<Fornecedor> ConsultarPorCnpj(string cnpj)
         {
-            return await _context.Fornecedores.AsNoTracking().FirstOrDefaultAsync(f => f.Cnpj == cnpj);
+            return await _context.Fornecedores.AsNoTracking().FirstOrDefaultAsync(f => f.Cnpj == cnpj && f.Ativo == true);
         }
 
         async public Task<ICollection<Fornecedor>> ConsultarPorNomeFantasia(string nomeFantasia)
         {
-            return await _context.Fornecedores.Where(f => f.NomeFantasia == nomeFantasia).AsNoTracking().ToListAsync();
+            return await _context.Fornecedores.Where(f => f.NomeFantasia == nomeFantasia && f.Ativo == true ).AsNoTracking().ToListAsync();
         }
-        async public Task<Fornecedor> ConsultarPorIdCompleto(int id)
+
+        async public Task<ICollection<Fornecedor>> ListarAtivos()
         {
-            var telefones = _context.Telefones.Where(t => t.PessoaId == id).AsNoTracking().ToList();
-            var enderecos = _context.Enderecos.Where(e => e.PessoaId == id).AsNoTracking().ToList();
-            var fornecedor = await _context.Fornecedores.AsNoTracking().FirstAsync(c => c.PessoaId == id);
-            fornecedor.Telefones = telefones;
-            fornecedor.Enderecos = enderecos;
-            return fornecedor;
+            return await _context.Fornecedores.Where(c => c.Ativo == true).AsNoTracking().ToListAsync();
         }
     }
 }

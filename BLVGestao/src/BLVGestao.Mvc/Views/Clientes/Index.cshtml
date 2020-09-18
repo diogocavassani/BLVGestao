@@ -6,67 +6,72 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="content-header container-fluid row mb-2 col-sm-6">
-        <h1 class="m-0 text-dark">Clientes</h1>
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="Codigo">
-            <input class="form-control form-control-navbar" type="search" placeholder="Nome" aria-label="Nome">
-            <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-
-        </div>
-        <button class="float-right">
-            <a class="fa fa-plus" asp-action="Create">Novo</a>
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <h1 class="m-0 text-dark">Clientes</h1>
+    <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="Codigo">
+        <input class="form-control form-control-navbar" type="search" placeholder="Nome" aria-label="Nome">
+        <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
         </button>
-    </div>
-        
 
-        <p>
-            
-        </p>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DataNascimento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cpf)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Rg)
-                    </th>
-                    <th>
-                        Ações
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DataNascimento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cpf)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rg)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.PessoaId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.PessoaId">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    </div>
+    <button class="float-right">
+        <a class="fa fa-plus" asp-action="Create">Novo</a>
+    </button>
+</div>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PessoaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rg)
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PessoaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rg)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PessoaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PessoaId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,6 +1,12 @@
 ﻿@model BLVGestao.Domain.Model.Pessoa
-<div class="list-seperator"> </div>
-<div class="list-seperator"> </div>
+
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <h1 class="m-0 text-dark">Telefones</h1>
+    <br />
+    <button class="float-right">
+        <a class="fa fa-plus" asp-route-id="@Model.PessoaId" asp-controller="Telefone" asp-action="Create">NovoTelefone </a>
+    </button>
+</div>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -11,22 +17,37 @@
     <tbody>
         @foreach (var item in Model.Telefones)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(t => item.Numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(t => item.TipoTelefone)
-                </td>
-                <td>
-                    <a asp-action="EditarTelefone" asp-route-id="@item.TelefoneId">Edit</a> |
-                    <a asp-action="DeletarTelefone" asp-route-id="@item.TelefoneId">Delete</a>
-                </td>
+            if (item.Ativo == true)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(t => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(t => item.TipoTelefone)
+                    </td>
+                    <td>
+                        <a asp-controller="Telefone" asp-action="Edit" asp-route-id="@item.TelefoneId">Edit</a> |
+                        <a asp-controller="Telefone" asp-action="Delete" asp-route-id="@item.TelefoneId">Delete</a>
+                    </td>
 
-            </tr>
+                </tr>
+            }
+
+
         }
     </tbody>
+</table>
 
+
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <h1 class="m-0 text-dark">Endereços</h1>
+    <br />
+    <button class="float-right">
+        <a class="fa fa-plus" asp-route-id="@Model.PessoaId" asp-controller="Endereco" asp-action="Create">Novo Endereco </a>
+    </button>
+</div>
+<table class="table table-hover">
     <thead>
         <tr>
             <th>LOGRADOURO</th>
@@ -37,22 +58,27 @@
     <tbody>
         @foreach (var item in Model.Enderecos)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(t => item.Logradouro)
-                </td>
-                <td>
-                    @Html.DisplayFor(t => item.Numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(t => item.Bairro)
-                </td>
-                <td>
-                    <a asp-action="EditarTelefone" asp-route-id="@item.EnderecoId">Edit</a> |
-                    <a asp-action="DeletarTelefone" asp-route-id="@item.EnderecoId">Delete</a>
-                </td>
+            if (item.Ativo == true)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(t => item.Logradouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(t => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(t => item.Bairro)
+                    </td>
+                    <td>
+                        <a asp-controller="Endereco" asp-action="Edit" asp-route-id="@item.EnderecoId">Edit</a> |
+                        <a asp-controller="Endereco" asp-action="Delete" asp-route-id="@item.EnderecoId">Delete</a>
+                    </td>
 
-            </tr>
+                </tr>
+            }
+
         }
     </tbody>
 </table>
+

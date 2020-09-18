@@ -30,5 +30,9 @@ namespace BLVGestao.Data.ORM
             //Codigo para pegar todas os Mapeamentos de uma vez. Entretanto os Mapeamentos estão incorretos         
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
     }
 }

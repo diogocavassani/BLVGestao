@@ -13,23 +13,27 @@ namespace BLVGestao.Mvc.Controllers
 {
     public class FornecedoresController : Controller
     {
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IFornecedorRepositorio _fornecedorRepositorio;
 
-        public FornecedoresController(IFornecedorRepositorio fornecedorRepositorio)
+
+
+        public FornecedoresController(IPessoaRepositorio pessoaRepositorio, IFornecedorRepositorio fornecedorRepositorio)
         {
+            _pessoaRepositorio = pessoaRepositorio;
             _fornecedorRepositorio = fornecedorRepositorio;
         }
 
-        // GET: Fornecedores
+
         public async Task<IActionResult> Index()
         {
-            return View(await _fornecedorRepositorio.ListarTodos());
+            return View(await _fornecedorRepositorio.ListarAtivos());
         }
 
-        // GET: Fornecedores/Details/5
+
         public async Task<IActionResult> Details(int id)
         {
-            var fornecedor = await _fornecedorRepositorio.ConsultarPorIdCompleto(id);
+            var fornecedor = await _pessoaRepositorio.ConsultarPorIdCompleto(id);
             if (fornecedor == null)
             {
                 return NotFound();
@@ -38,16 +42,16 @@ namespace BLVGestao.Mvc.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Create
+
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Fornecedores/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RazaoSocial,NomeFantasia,Cnpj,PessoaId,TipoPessoa,Ativo")] Fornecedor fornecedor)
+        public async Task<IActionResult> Create(Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +61,8 @@ namespace BLVGestao.Mvc.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Edit/5
+
+
         public async Task<IActionResult> Edit(int id)
         {
             var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
@@ -68,37 +73,21 @@ namespace BLVGestao.Mvc.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RazaoSocial,NomeFantasia,Cnpj,PessoaId,TipoPessoa,Ativo")] Fornecedor fornecedor)
+        public async Task<IActionResult> Edit(int id, Fornecedor fornecedor)
         {
-            if (id != fornecedor.PessoaId)
-            {
-                return NotFound();
-            }
-
+            fornecedor.PessoaId = id;
             if (ModelState.IsValid)
             {
-                try
-                {
-                    await _fornecedorRepositorio.Alterar(fornecedor);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FornecedorExists(fornecedor.PessoaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _fornecedorRepositorio.Alterar(fornecedor);
                 return RedirectToAction(nameof(Index));
             }
             return View(fornecedor);
         }
+
+
 
         // GET: Fornecedores/Delete/5
         public async Task<IActionResult> Delete(int id)
@@ -121,16 +110,9 @@ namespace BLVGestao.Mvc.Controllers
         {
             var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
             fornecedor.Inativar();
+
             await _fornecedorRepositorio.Alterar(fornecedor);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool FornecedorExists(int id)
-        {
-            var cliente = _fornecedorRepositorio.ListarPorId(id);
-            if(cliente == null)
-                return false;
-            return true;
         }
     }
 }

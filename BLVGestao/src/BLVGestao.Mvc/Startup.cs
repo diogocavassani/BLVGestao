@@ -29,6 +29,10 @@ namespace BLVGestao.Mvc
             services.AddMemoryCache();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
+            services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
+            services.AddScoped<ITelefoneRepositorio, TelefoneRepositorio>();
+            services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

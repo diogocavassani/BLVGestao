@@ -8,30 +8,34 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using BLVGestao.Mvc.Models;
+using System.Collections;
 
 namespace BLVGestao.Mvc.Controllers
 {
     public class ClientesController : Controller
     {
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IClienteRepositorio _clienteRepositorio;
-        //private readonly Cliente _cliente;
 
-        public ClientesController(IClienteRepositorio clienteRepositorio)
+
+
+        public ClientesController(IPessoaRepositorio pessoaRepositorio, IClienteRepositorio clienteRepositorio)
         {
+            _pessoaRepositorio = pessoaRepositorio;
             _clienteRepositorio = clienteRepositorio;
-            //_cliente = new Cliente(0, null, DateTime.Now, null, null);
         }
 
-        // GET: Clientes
+
         public async Task<IActionResult> Index()
         {
-            return View(await _clienteRepositorio.ListarTodos());
+            return View(await _clienteRepositorio.ListarAtivos());
         }
 
-        // GET: Clientes/Details/5
+
         public async Task<IActionResult> Details(int id)
         {
-            var cliente = await _clienteRepositorio.ConsultarPorIdCompleto(id);
+            var cliente = await _pessoaRepositorio.ConsultarPorIdCompleto(id);
             if (cliente == null)
             {
                 return NotFound();
@@ -40,9 +44,10 @@ namespace BLVGestao.Mvc.Controllers
             return View(cliente);
         }
 
-        // GET: Clientes/Create
+
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -51,52 +56,30 @@ namespace BLVGestao.Mvc.Controllers
         {
 
             await _clienteRepositorio.Inserir(cliente);
-            
-            return View(cliente);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Clientes/Edit/5
-        public async Task<IActionResult> Edit(int id, Cliente cliente)
+
+        public async Task<IActionResult> Edit(int id)
         {
-            if(id != cliente.PessoaId)
+            var cliente = await _clienteRepositorio.ListarPorId(id);
+            if (cliente == null)
                 return NotFound();
-            if(ModelState.IsValid)
-            {
-                try
-                {
-                    await _clienteRepositorio.Alterar(cliente);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    
-                    if (!ClienteExists(cliente.PessoaId))
-                        return NotFound();
-                    else
-                        throw;
-                   
-                }
-                return RedirectToAction(nameof(Index));
-            }
             return View(cliente);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit (Cliente cliente)
+        public async Task<IActionResult> Edit(int id, Cliente cliente)
         {
+            cliente.PessoaId = id;
             if (ModelState.IsValid)
             {
-                try
-                {
-                    await _clienteRepositorio.Alterar(cliente);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    
-                }
+                await _clienteRepositorio.Alterar(cliente);
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(cliente);
 
         }
@@ -105,7 +88,7 @@ namespace BLVGestao.Mvc.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var cliente = await _clienteRepositorio.ListarPorId(id);
-             
+
             if (cliente == null)
             {
                 return NotFound();
@@ -119,10 +102,10 @@ namespace BLVGestao.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-           var cliente =  await _clienteRepositorio.ListarPorId(id);
-           cliente.Inativar();
-           await _clienteRepositorio.Alterar(cliente);
-           return RedirectToAction(nameof(Index));
+            var cliente = await _clienteRepositorio.ListarPorId(id);
+            cliente.Inativar();
+            await _clienteRepositorio.Alterar(cliente);
+            return RedirectToAction(nameof(Index));
         }
 
         private bool ClienteExists(int id)
@@ -133,6 +116,6 @@ namespace BLVGestao.Mvc.Controllers
                 return false;
             return true;
         }
-    
+
     }
 }

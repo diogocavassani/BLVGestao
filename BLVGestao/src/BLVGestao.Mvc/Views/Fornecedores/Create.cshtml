@@ -28,7 +28,8 @@
                 <input asp-for="Cnpj" class="form-control" />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
-
+            <partial name="PartialViews/_createTelefone" />
+            <partial name="PartialViews/_createEndereco" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

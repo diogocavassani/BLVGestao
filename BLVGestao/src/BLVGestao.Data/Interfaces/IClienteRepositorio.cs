@@ -8,6 +8,7 @@ namespace BLVGestao.Data.Interfaces
     {
         Task<ICollection<Cliente>> ConsultarPorNome(string nome);
         Task<Cliente> ConsultarPorCpf(string cpf);
-        Task<Cliente> ConsultarPorIdCompleto(int id);
+        Task<ICollection<Cliente>> ListarAtivos();
+        
     }
 }

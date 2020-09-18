@@ -20,29 +20,16 @@ namespace BLVGestao.Data.Repositories
 
         async public Task<Cliente> ConsultarPorCpf(string cpf)
         {
-            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Cpf == cpf);
+            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Cpf == cpf && c.Ativo == true);
         }
-
-         async public Task<Cliente> ConsultarPorIdCompleto(int id)
-        {
-            var telefones = _context.Telefones.Where(t => t.PessoaId == id).AsNoTracking().ToList();
-            var enderecos = _context.Enderecos.Where(e => e.PessoaId == id).AsNoTracking().ToList();
-            var cliente = await _context.Clientes.AsNoTracking().FirstAsync(c => c.PessoaId == id);
-            cliente.Telefones = telefones;
-            cliente.Enderecos = enderecos;
-            return cliente;
-        }
-
         async public Task<ICollection<Cliente>> ConsultarPorNome(string nome)
         {
-            return await _context.Clientes.Where(c => c.Nome == nome).AsNoTracking().ToListAsync();
+            return await _context.Clientes.Where(c => c.Nome == nome && c.Ativo == true).AsNoTracking().ToListAsync();
         }
 
-        //async public Task Inativar(Cliente cliente)
-        //{
-        //    cliente.Inativar();
-        //    _context.Clientes.Update(cliente);
-        //    await _context.SaveChangesAsync();
-        //}
+        async public Task<ICollection<Cliente>> ListarAtivos()
+        {
+            return await _context.Clientes.Where(c => c.Ativo == true).AsNoTracking().ToListAsync();
+        }
     }
 }
