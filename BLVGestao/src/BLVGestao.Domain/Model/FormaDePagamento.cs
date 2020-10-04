@@ -10,10 +10,13 @@ namespace BLVGestao.Domain.Model
             Descricao = descricao;
             PrazoRecebimento = prazoRecebimento;
         }
+        public FormaDePagamento()
+        {
 
-        public int FormaDePagamentoId { get; private set; }
-        public string Descricao { get; private set; }
-        public int PrazoRecebimento { get; private set; }
+        }
+        public int FormaDePagamentoId { get; set; }
+        public string Descricao { get; set; }
+        public int PrazoRecebimento { get; set; }
 
         public virtual ICollection<Venda> Vendas { get; set; }
     }

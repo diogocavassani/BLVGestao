@@ -16,8 +16,8 @@
         </button>
 
     </div>
-    <button class="float-right">
-        <a class="fa fa-plus" asp-action="Create">Novo</a>
+    <button class="btn btn-outline-success">
+        <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
     </button>
 </div>
 
@@ -27,22 +27,21 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaId)
+                Codigo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
+               Data de Nasc.
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
+                CFP
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rg)
+                RG
             </th>
             <th>
-                Ações
             </th>
         </tr>
     </thead>
@@ -66,9 +65,15 @@
                 @Html.DisplayFor(modelItem => item.Rg)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PessoaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PessoaId">Delete</a>
+                <button type="button" class="btn btn-warning fa fa-pencil">
+                    <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.PessoaId">Editar</a>
+                </button>
+                <button type="button" class="btn btn-info fa fa-search">
+                    <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.PessoaId">Detalhes</a>
+                </button>
+                <button type="button" class="btn btn-danger fa fa-trash">
+                    <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.PessoaId">Excluir</a>
+                </button>
             </td>
         </tr>
         }

@@ -15,13 +15,19 @@ namespace BLVGestao.Domain.Model
             ValorCusto = valorCusto;
         }
 
-        public int ProdutoId { get; private set; }
-        public int FornecedorId { get; private set; }
-        public string Descricao { get; private set; }
-        public string Observacao { get; private set; }
-        public string Unidade { get; private set; }
-        public decimal ValorVenda { get; private set; }
-        public decimal ValorCusto { get; private set; }
+        public Produto()
+        {
+
+        }
+
+        public int ProdutoId { get; set; }
+        public int FornecedorId { get; set; }
+        public string Descricao { get; set; }
+        public string Observacao { get; set; }
+        public string Unidade { get; set; }
+        public decimal ValorVenda { get; set; }
+        public decimal ValorCusto { get; set; }
+        public decimal Quantidade { get; set; }
 
         public virtual ICollection<ItemVenda> ItensVendas { get; set; }
         public Fornecedor Fornecedor { get; set; }

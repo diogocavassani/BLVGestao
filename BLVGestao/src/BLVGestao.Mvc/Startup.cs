@@ -32,6 +32,11 @@ namespace BLVGestao.Mvc
             services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
             services.AddScoped<ITelefoneRepositorio, TelefoneRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IGrupoAcessoRepositorio, GrupoAcessoRepositorio>();
+            services.AddScoped<IFormaDePagamentoRepositorio, FormaDePagamentoRepositorio>();
+            services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+
          
         }
 

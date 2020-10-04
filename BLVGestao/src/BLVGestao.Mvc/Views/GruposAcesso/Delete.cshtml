@@ -1,4 +1,4 @@
-﻿@model BLVGestao.Domain.Model.Telefone
+﻿@model BLVGestao.Domain.Model.GrupoAcesso
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,26 +8,28 @@
 
 <h3>Tem certeza que deseja inativar este item?</h3>
 <div>
-    <h4>Telefone</h4>
+    <h4>GrupoAcesso</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
+            @Html.DisplayNameFor(model => model.Descricao)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
+            @Html.DisplayFor(model => model.Descricao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoTelefone)
+            @Html.DisplayNameFor(model => model.Permissao)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoTelefone)
+            @Html.DisplayFor(model => model.Permissao)
         </dd>
     </dl>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="TelefoneId" />
+        <input type="hidden" asp-for="GrupoAcessoId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+

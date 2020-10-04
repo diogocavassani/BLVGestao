@@ -16,6 +16,53 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p class="text-bold text-white">
+                            Cadastros
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="Clientes" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Clientes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Produtos" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Produtos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Fornecedores" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Fornecedores</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="FormasDePagamento" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Formas de Pgto.</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Usuarios" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="GruposAcesso" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="text-bold text-white-50">Grupos de Usuarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <a asp-controller="Clientes" asp-action="Index" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -33,7 +80,7 @@
                         </p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a asp-controller="Produto" asp-action="Index" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
@@ -43,9 +90,9 @@
                         </p>
                     </a>
                 </li>
-                
-                
-                
+
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cogs "></i>

@@ -27,8 +27,12 @@
                         @Html.DisplayFor(t => item.TipoTelefone)
                     </td>
                     <td>
-                        <a asp-controller="Telefone" asp-action="Edit" asp-route-id="@item.TelefoneId">Edit</a> |
-                        <a asp-controller="Telefone" asp-action="Delete" asp-route-id="@item.TelefoneId">Delete</a>
+                        <button type="button" class="btn btn-warning fa fa-pencil">
+                            <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.TelefoneId">Editar</a>
+                        </button>
+                        <button type="button" class="btn btn-danger fa fa-trash">
+                            <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.TelefoneId">Excluir</a>
+                        </button>
                     </td>
 
                 </tr>
@@ -71,8 +75,12 @@
                         @Html.DisplayFor(t => item.Bairro)
                     </td>
                     <td>
-                        <a asp-controller="Endereco" asp-action="Edit" asp-route-id="@item.EnderecoId">Edit</a> |
-                        <a asp-controller="Endereco" asp-action="Delete" asp-route-id="@item.EnderecoId">Delete</a>
+                        <button type="button" class="btn btn-warning fa fa-pencil">
+                            <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.EnderecoId">Editar</a>
+                        </button>
+                        <button type="button" class="btn btn-danger fa fa-trash">
+                            <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.EnderecoId">Excluir</a>
+                        </button>
                     </td>
 
                 </tr>

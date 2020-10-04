@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BLVGestao.Domain.Model.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <h1 class="m-0 text-dark">Produtos</h1>
+    <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="Codigo">
+        <input class="form-control form-control-navbar" type="search" placeholder="Nome" aria-label="Nome">
+        <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+
+    </div>
+    <button class="btn btn-outline-success">
+        <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Observação
+            </th>
+            <th>
+                Unidade
+            </th>
+            <th>
+                Valor Venda
+            </th>
+            <th>
+                Valor Custo
+            </th>
+            <th>
+                Quantidade
+            </th>
+            <th>
+                Fornecedor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorCusto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning fa fa-pencil">
+                        <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.ProdutoId">Editar</a>
+                    </button>
+                    <button type="button" class="btn btn-info fa fa-search">
+                        <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.ProdutoId">Detalhes</a>
+                    </button>
+                    <button type="button" class="btn btn-danger fa fa-trash">
+                        <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.ProdutoId">Excluir</a>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -11,11 +11,15 @@ namespace BLVGestao.Domain.Model
             Login = login;
             Senha = senha;
         }
+        public Usuario()
+        {
 
-        public int UsuarioId { get; private set; }
+        }
+
+        public int UsuarioId { get; set; }
         public int GrupoAcessoId { get; set; }
-        public string Login { get; private set; }
-        public string Senha { get; private set; }
+        public string Login { get; set; }
+        public string Senha { get; set; }
         public virtual GrupoAcesso GrupoAcesso { get; set; }
         public virtual ICollection<Venda> Vendas { get; set; }
     }
