@@ -32,6 +32,11 @@ namespace BLVGestao.Mvc.Controllers
             return View(await _clienteRepositorio.ListarAtivos());
         }
 
+        public async Task<IActionResult> FiltarClientes()
+        {
+            return View(nameof(Index));
+        }
+
 
         public async Task<IActionResult> Details(int id)
         {
