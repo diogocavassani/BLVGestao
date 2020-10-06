@@ -7,5 +7,7 @@ namespace BLVGestao.Data.Interfaces
     public interface IUsuarioRepositorio : IRepositorioBase<Usuario>
     {
         Task<ICollection<Usuario>> ListarAtivos();
+
+        Usuario LogarUsuario(string login,string senha);
     }
 }

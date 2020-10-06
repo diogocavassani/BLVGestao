@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -20,13 +21,13 @@ namespace BLVGestao.Mvc.Controllers
             _grupoAcessoRepositorio = grupoAcessoRepositorio;
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
             return View(await _grupoAcessoRepositorio.ListarAtivos());
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Details(int id)
         {
             var grupoAcesso = await _grupoAcessoRepositorio.ListarPorId(id);
@@ -38,7 +39,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(grupoAcesso);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
             return View();
@@ -57,7 +58,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(grupoAcesso);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -94,7 +95,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(grupoAcesso);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
 

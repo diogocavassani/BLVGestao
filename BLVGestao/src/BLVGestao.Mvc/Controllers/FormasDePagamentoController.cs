@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -20,7 +21,7 @@ namespace BLVGestao.Mvc.Controllers
             _formaDePagamentoRepositorio = formaDePagamentoRepositorio;
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
             return View(await _formaDePagamentoRepositorio.ListarAtivos());
@@ -60,7 +61,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(formaDePagamento);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -96,6 +97,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: FormasDePagamento/Delete/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
 

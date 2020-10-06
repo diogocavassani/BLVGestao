@@ -20,6 +20,19 @@ namespace BLVGestao.Mvc.Controllers
 
         public IActionResult Index()
         {
+            var usuario = "Anônimo";
+            var autenticado = false;
+            if (HttpContext.User.Identity.IsAuthenticated) {
+                usuario = HttpContext.User.Identity.Name;
+                autenticado = true;
+            }
+            else
+            {
+                usuario = "Não Logado";
+                autenticado = false;
+            }
+            ViewBag.usuario = usuario;
+            ViewBag.autenticado = autenticado;
             return View();
         }
 

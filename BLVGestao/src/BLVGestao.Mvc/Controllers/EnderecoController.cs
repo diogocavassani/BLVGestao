@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLVGestao.Data.Interfaces;
 using BLVGestao.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace BLVGestao.Mvc.Controllers
             _enderecoRepositorio = enderecoRepositorio;
         }
         // GET: EnderecoController
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
             return View();
@@ -39,6 +41,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: EnderecoController/Edit/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<ActionResult> Edit(int id)
         {
             var endereco = await _enderecoRepositorio.ListarPorId(id);
@@ -68,7 +71,7 @@ namespace BLVGestao.Mvc.Controllers
             
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<ActionResult> Delete(int id)
         {
             var endereco = await _enderecoRepositorio.ListarPorId(id);

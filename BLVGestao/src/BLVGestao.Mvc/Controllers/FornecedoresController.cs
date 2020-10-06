@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -24,13 +25,13 @@ namespace BLVGestao.Mvc.Controllers
             _fornecedorRepositorio = fornecedorRepositorio;
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
             return View(await _fornecedorRepositorio.ListarAtivos());
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Details(int id)
         {
             var fornecedor = await _pessoaRepositorio.ConsultarPorIdCompleto(id);
@@ -42,7 +43,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(fornecedor);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
             return View();
@@ -62,7 +63,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
             var fornecedor = await _fornecedorRepositorio.ListarPorId(id);
@@ -90,6 +91,7 @@ namespace BLVGestao.Mvc.Controllers
 
 
         // GET: Fornecedores/Delete/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
 

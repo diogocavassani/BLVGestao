@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -24,6 +25,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Produtos
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
 
@@ -31,6 +33,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Produtos/Details/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Details(int id)
         {
             var produto = await _produtoRepositorio.ListarPorId(id);
@@ -43,6 +46,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Produtos/Create
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Create()
         {
             var fornecedores = await _fornecedorRepositorio.ListarAtivos();
@@ -65,6 +69,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Produtos/Edit/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -103,7 +108,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(produto);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == null)

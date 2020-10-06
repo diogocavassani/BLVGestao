@@ -10,6 +10,7 @@ using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
 using BLVGestao.Mvc.Models;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -26,7 +27,7 @@ namespace BLVGestao.Mvc.Controllers
             _clienteRepositorio = clienteRepositorio;
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
             return View(await _clienteRepositorio.ListarAtivos());
@@ -37,7 +38,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(nameof(Index));
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Details(int id)
         {
             var cliente = await _pessoaRepositorio.ConsultarPorIdCompleto(id);
@@ -49,7 +50,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(cliente);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
 
@@ -65,7 +66,7 @@ namespace BLVGestao.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
             var cliente = await _clienteRepositorio.ListarPorId(id);
@@ -90,6 +91,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Clientes/Delete/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
             var cliente = await _clienteRepositorio.ListarPorId(id);

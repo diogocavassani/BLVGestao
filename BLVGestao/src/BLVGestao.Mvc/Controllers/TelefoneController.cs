@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLVGestao.Data.Interfaces;
 using BLVGestao.Domain.Enums;
 using BLVGestao.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace BLVGestao.Mvc.Controllers
             _pessoaRepositorio = pessoaRepositorio;
         }
 
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
             return View();
@@ -39,7 +41,7 @@ namespace BLVGestao.Mvc.Controllers
             return RetornarDeAcordoComPessoa(telefone);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<ActionResult> Edit(int id)
         {
             var telefone = await _telefoneRepositorio.ListarPorId(id);
@@ -68,7 +70,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(telefone);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<ActionResult> Delete(int id)
         {
             var telefone = await _telefoneRepositorio.ListarPorId(id);
@@ -87,6 +89,7 @@ namespace BLVGestao.Mvc.Controllers
             return RetornarDeAcordoComPessoa(telefone);
         }
 
+        [Authorize(Roles = "Administrativo")]
         private ActionResult RetornarDeAcordoComPessoa(Telefone telefone)
         {
             if (telefone.Pessoa is Cliente)

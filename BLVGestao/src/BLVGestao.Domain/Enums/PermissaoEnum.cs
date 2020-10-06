@@ -3,7 +3,7 @@
     public enum PermissaoEnum
     {
         Financeiro = 1,
-        Vendedor,
-        Administrativo
+        Vendedor = 2,
+        Administrativo = 3
     }
 }

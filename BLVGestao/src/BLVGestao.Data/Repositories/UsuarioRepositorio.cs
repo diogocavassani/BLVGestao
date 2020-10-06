@@ -21,5 +21,10 @@ namespace BLVGestao.Data.Repositories
             return await _context.Usuarios.Include(u => u.GrupoAcesso).Where(u => u.Ativo == true).AsNoTracking().ToListAsync();
                     
         }
+
+        public Usuario LogarUsuario(string login, string senha)
+        {
+            return _context.Set<Usuario>().Where(u => u.Login.ToLower() == login.ToLower() && u.Senha.ToLower() == senha.ToLower()).Include(u=>u.GrupoAcesso).AsNoTracking().FirstOrDefault();
+        }
     }
 }

@@ -25,7 +25,8 @@ namespace BLVGestao.Mvc
             services.AddControllersWithViews();
             services.AddCors();
             services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("ContextLocal")));
-
+            services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", config => { config.Cookie.Name = "UserLoginCookie";
+                config.LoginPath = "/Login/UserLogin";config.AccessDeniedPath = "/Usuarios/AcessoNegado"; });
             services.AddMemoryCache();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
@@ -58,14 +59,14 @@ namespace BLVGestao.Mvc
 
             app.UseRouting();
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Clientes}/{action=Index}/{id?}");
+                    pattern: "{controller=Usuarios}/{action=LogarUsuario}/{id?}");
             });
         }
     }

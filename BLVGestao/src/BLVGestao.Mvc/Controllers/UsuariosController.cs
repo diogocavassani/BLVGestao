@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using BLVGestao.Data.ORM;
 using BLVGestao.Domain.Model;
 using BLVGestao.Data.Interfaces;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -22,7 +25,7 @@ namespace BLVGestao.Mvc.Controllers
             _grupoAcessoRepositorio = grupoAcessoRepositorio;
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
            //TODO:Tentar fazer pesquisa com include.
@@ -43,7 +46,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(usuario);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Create()
         {
             var grupo =  (System.Collections.IEnumerable)await _grupoAcessoRepositorio.ListarTodos();
@@ -67,6 +70,7 @@ namespace BLVGestao.Mvc.Controllers
         }
 
         // GET: Usuarios/Edit/5
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -108,7 +112,7 @@ namespace BLVGestao.Mvc.Controllers
             return View(usuario);
         }
 
-
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -135,6 +139,40 @@ namespace BLVGestao.Mvc.Controllers
         private async  Task<IEnumerable<GrupoAcesso>> ListaGrupoAcesso()
         {
             return (IEnumerable<GrupoAcesso>)await _grupoAcessoRepositorio.ListarAtivos();
+        }
+        [HttpGet]
+        public ActionResult LogarUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogarUsuario([Bind] Usuario usuario) {
+            var user =  _usuarioRepositorio.LogarUsuario(usuario.Login,usuario.Senha);
+            if(user != null)
+            {
+                var userClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, user.Login),
+                    new Claim(ClaimTypes.Role, user.GrupoAcesso.Permissao.ToString()),
+                };
+                var minhaIdentity = new ClaimsIdentity(userClaims,"Usuario");
+                var userPrincipal = new ClaimsPrincipal(new[] { minhaIdentity});
+                await HttpContext.SignInAsync(userPrincipal);
+                return RedirectToAction("Index","Home");
+            }
+            ViewBag.Message = "Credenciais inválidas!";
+            return View(usuario);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index","Home");
+        }
+        public IActionResult AcessoNegado()
+        {
+            return View();
         }
     }
 }
