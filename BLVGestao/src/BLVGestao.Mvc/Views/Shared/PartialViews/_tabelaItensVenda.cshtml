@@ -1,0 +1,36 @@
+﻿
+@{
+}
+@model BLVGestao.Domain.Model.Venda
+
+
+
+<h1>Lista Produtos</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ItensVendas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(t => item.Produto.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(t => item.Quantidade)
+                </td>
+                <td>
+                    @{decimal total = item.Quantidade * item.Produto.ValorVenda;
+                        var teste = total.ToString("C");}
+                    @Html.DisplayFor(t => teste)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

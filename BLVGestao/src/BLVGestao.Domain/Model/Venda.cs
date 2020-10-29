@@ -24,7 +24,14 @@ namespace BLVGestao.Domain.Model
         public DateTime Data { get; private set; }
         public decimal Total { get; private set; }
         public SituacaoVendaEnum Situacao { get; private set; }
-
+        public void Inativar()
+        {
+            this.Situacao = SituacaoVendaEnum.Cancelada;
+        }
+        public void Ativar()
+        {
+            this.Situacao = SituacaoVendaEnum.Confirmada;
+        }
 
         public Usuario Usuario { get; set; }
         public Cliente Cliente { get; set; }

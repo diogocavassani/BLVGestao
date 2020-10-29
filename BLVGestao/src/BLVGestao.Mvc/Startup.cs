@@ -24,7 +24,7 @@ namespace BLVGestao.Mvc
         {
             services.AddControllersWithViews();
             services.AddCors();
-            services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("ContextLocal")));
+            services.AddDbContext<Context>(options => options.UseMySql(Configuration.GetConnectionString("ContextFabricio")));
             services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", config => { config.Cookie.Name = "UserLoginCookie";
                 config.LoginPath = "/Login/UserLogin";config.AccessDeniedPath = "/Usuarios/AcessoNegado"; });
             services.AddMemoryCache();
@@ -37,7 +37,7 @@ namespace BLVGestao.Mvc
             services.AddScoped<IGrupoAcessoRepositorio, GrupoAcessoRepositorio>();
             services.AddScoped<IFormaDePagamentoRepositorio, FormaDePagamentoRepositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
-
+            services.AddScoped<IVendaRepositorio, VendaRepositorio>();
          
         }
 

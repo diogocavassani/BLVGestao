@@ -10,5 +10,7 @@ namespace BLVGestao.Data.Interfaces
         Task<Fornecedor> ConsultarPorCnpj(string cnpj);
         Task<ICollection<Fornecedor>> ListarAtivos();
 
+
+
     }
 }

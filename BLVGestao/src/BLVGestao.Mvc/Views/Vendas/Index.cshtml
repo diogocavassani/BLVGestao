@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BLVGestao.Domain.Model.Venda>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<button>
+    <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
+</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Situacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormaDePagamento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Situacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormaDePagamento.Descricao)
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning fa fa-pencil">
+                    <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.VendaId">Editar</a>
+                </button>
+                <button type="button" class="btn btn-info fa fa-search">
+                    <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.VendaId">Detalhes</a>
+                </button>
+                <button type="button" class="btn btn-danger fa fa-trash">
+                    <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.VendaId">Excluir</a>
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

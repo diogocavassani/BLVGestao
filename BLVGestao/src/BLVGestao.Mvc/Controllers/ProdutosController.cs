@@ -78,7 +78,7 @@ namespace BLVGestao.Mvc.Controllers
             {
                 return NotFound();
             }
-            ViewData["FornecedorId"] = new SelectList(await ListaFornecedores(), "PessoaId", "Discriminator", produto.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(await ListaFornecedores(), "PessoaId", "RazaoSocial", produto.FornecedorId);
             return View(produto);
         }
 
@@ -104,7 +104,7 @@ namespace BLVGestao.Mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FornecedorId"] = new SelectList(await ListaFornecedores(), "PessoaId", "Discriminator", produto.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(await _fornecedorRepositorio.ListarTodos(), "PessoaId", "RazaoSocial", produto.FornecedorId);
             return View(produto);
         }
 
@@ -138,7 +138,7 @@ namespace BLVGestao.Mvc.Controllers
 
         private async Task<IEnumerable<Fornecedor>> ListaFornecedores()
         {
-            return (IEnumerable<Fornecedor>)await _produtoRepositorio.ListarTodos();
+            return await _fornecedorRepositorio.ListarTodos();
         }
     }
 }
