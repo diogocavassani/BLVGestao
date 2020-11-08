@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BLVGestao.Domain.Model
 {
@@ -22,8 +23,12 @@ namespace BLVGestao.Domain.Model
 
         public int ProdutoId { get; set; }
         public int FornecedorId { get; set; }
+        [MaxLength(50, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
+        [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
         public string Descricao { get; set; }
         public string Observacao { get; set; }
+        [MaxLength(3, ErrorMessage = "Este campo deve conter entre 1 e 3 caracteres")]
+        [MinLength(1, ErrorMessage = "Este campo deve conter entre 1 e 3 caracteres")]
         public string Unidade { get; set; }
         public decimal ValorVenda { get; set; }
         public decimal ValorCusto { get; set; }

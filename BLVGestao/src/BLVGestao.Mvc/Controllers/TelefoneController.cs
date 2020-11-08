@@ -53,18 +53,19 @@ namespace BLVGestao.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Telefone telefone)
-        {
+         {
+            var telefoneCompleto = new Telefone();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _telefoneRepositorio.AlterarTelefoneComPessoa(telefone);
+                    telefoneCompleto = await _telefoneRepositorio.AlterarTelefoneComPessoa(telefone);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
 
                 }
-                return RetornarDeAcordoComPessoa(telefone);
+                return RetornarDeAcordoComPessoa(telefoneCompleto);
             }
 
             return View(telefone);
@@ -92,6 +93,7 @@ namespace BLVGestao.Mvc.Controllers
         [Authorize(Roles = "Administrativo")]
         private ActionResult RetornarDeAcordoComPessoa(Telefone telefone)
         {
+
             if (telefone.Pessoa is Cliente)
                 return RedirectToAction("Index", "Clientes");
             return RedirectToAction("Index", "Fornecedores");

@@ -10,6 +10,7 @@ using BLVGestao.Domain.Model;
 using BLVGestao.Data.Repositories;
 using BLVGestao.Data.Interfaces;
 using BLVGestao.Domain.Enums;
+using BLVGestao.Mvc.Models;
 
 namespace BLVGestao.Mvc.Controllers
 {
@@ -49,21 +50,26 @@ namespace BLVGestao.Mvc.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            var produtos = await _produtoRepositorio.ListarAtivos();
-            var clientes = await _clienteRepositorio.ListarAtivos();
-            var formaPagamento = await _formaDePagementoRepositorio.ListarAtivos();
-            var usuario = await _usuarioRepositorio.ListarAtivos();
-            ViewData["ProdutoId"] = new SelectList(produtos,"ProdutoId","Descricao");
-            ViewData["ClienteId"] = new SelectList(clientes, "PessoaId", "Nome");
-            ViewData["FormaDePagamentoId"] = new SelectList(formaPagamento,"FormaDePagamentoId","Descricao");
-            ViewData["UsuarioId"] = new SelectList(usuario, "UsuarioId", "Login");
-            return  View();
+            var vendaViewModel = new VendaViewModel();
+            vendaViewModel.ListaCliente = await _clienteRepositorio.ListarAtivos();
+            vendaViewModel.ListaProduto = await _produtoRepositorio.ListarAtivos();
+            vendaViewModel.ListaFormaDePagamento = await _formaDePagementoRepositorio.ListarAtivos();
+
+            //var produtos = await _produtoRepositorio.ListarAtivos();
+            //var clientes = await _clienteRepositorio.ListarAtivos();
+            //var formaPagamento = await _formaDePagementoRepositorio.ListarAtivos();
+            //var usuario = await _usuarioRepositorio.ListarAtivos();
+            //ViewData["ProdutoId"] = new SelectList(produtos,"ProdutoId","Descricao");
+            //ViewData["ClienteId"] = new SelectList(clientes, "PessoaId", "Nome");
+            //ViewData["FormaDePagamentoId"] = new SelectList(formaPagamento,"FormaDePagamentoId","Descricao");
+            //ViewData["UsuarioId"] = new SelectList(usuario, "UsuarioId", "Login");
+            return  View(vendaViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("ClienteId,ItensVenda,UsuarioId,FormaPagamentoId,Data,")]Venda venda)       {
+        public async Task<IActionResult> Create([Bind("ClienteId,ItensVenda,UsuarioId,FormaPagamentoId,Data,")]Venda venda)      
+        {
             
-            venda.Ativar();
             await _vendaRepositorio.InserirVenda(venda);
             return RedirectToAction(nameof(Index));
         }
@@ -112,7 +118,7 @@ namespace BLVGestao.Mvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var venda = await _vendaRepositorio.BuscarPorIdCompleto(id);
-            venda.Inativar();
+            venda.Cancelar();
             await _vendaRepositorio.Alterar(venda);
             return RedirectToAction(nameof(Index));
         }

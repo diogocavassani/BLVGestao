@@ -17,21 +17,23 @@ namespace BLVGestao.Domain.Model
             Total = total;
             Situacao = situacao;
         }
-        public int VendaId { get; private set; }
-        public int ClienteId { get; private set; }
-        public int UsuarioId { get; private set; }
-        public int FormaDePagamentoId { get; private set; }
-        public DateTime Data { get; private set; }
-        public decimal Total { get; private set; }
-        public SituacaoVendaEnum Situacao { get; private set; }
-        public void Inativar()
+        public Venda()
+        {
+            Situacao = SituacaoVendaEnum.Confirmada;
+        }
+        
+        public int VendaId { get; set; }
+        public int ClienteId { get; set; }
+        public int UsuarioId { get; set; }
+        public int FormaDePagamentoId { get; set; }
+        public DateTime Data { get; set; }
+        public decimal Total { get; set; }
+        public SituacaoVendaEnum Situacao { get; set; }
+        public void Cancelar()
         {
             this.Situacao = SituacaoVendaEnum.Cancelada;
         }
-        public void Ativar()
-        {
-            this.Situacao = SituacaoVendaEnum.Confirmada;
-        }
+       
 
         public Usuario Usuario { get; set; }
         public Cliente Cliente { get; set; }

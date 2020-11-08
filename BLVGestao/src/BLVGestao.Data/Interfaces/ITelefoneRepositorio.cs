@@ -8,7 +8,7 @@ namespace BLVGestao.Data.Interfaces
 {
     public interface ITelefoneRepositorio : IRepositorioBase<Telefone>
     {
-        Task AlterarTelefoneComPessoa(Telefone telefone);
+        Task<Telefone> AlterarTelefoneComPessoa(Telefone telefone);
         Telefone BuscarComInclude(int id);
     }
 }

@@ -14,12 +14,13 @@ namespace BLVGestao.Data.Repositories
         {
         }
        
-        async public Task AlterarTelefoneComPessoa(Telefone telefone)
+        async public Task<Telefone> AlterarTelefoneComPessoa(Telefone telefone)
         {
             var telefoneCompleto = BuscarComInclude(telefone.TelefoneId);
             telefone.PessoaId = telefoneCompleto.PessoaId;
             _context.Telefones.Update(telefone);
             await _context.SaveChangesAsync();
+            return telefoneCompleto;
         }
 
         public Telefone BuscarComInclude(int id)

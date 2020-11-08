@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using BLVGestao.Domain.Enums;
 
 namespace BLVGestao.Domain.Model
@@ -19,7 +20,11 @@ namespace BLVGestao.Domain.Model
             TipoPessoa = TipoPessoaEnum.PessoaFisica;
         }
 
+        [MaxLength(50, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
+        [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
         public string RazaoSocial { get; set; }
+        [MaxLength(50, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
+        [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 e 50 caracteres")]
         public string NomeFantasia { get; set; }
         public string Cnpj { get; set; }
 
