@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label asp-for="Cliente.PessoaId" class="control-label"></label>
                     @*<select asp-for="Cliente.PessoaId" class="form-control" asp-items="ViewBag.ClienteId"></select>*@
-                <select asp-for="ListaCliente" class="form-control">
+                <select asp-for="ListaCliente" class="form-control" >
                     @foreach (var item in Model.ListaCliente)
                     {
                         <option value="2">@item.Nome</option>
@@ -50,10 +50,10 @@
             <div class="card-body">
                 <label asp-for="Produto" class="control-label">Produtos</label>
                 @*<select asp-for="Produto" class="form-control" asp-items="ViewBag.ProdutoId" id="produto"></select>*@
-                <select asp-for="ListaProduto" class="form-control">
+                <select asp-for="ListaProduto" class="form-control" id="produto-selecionado">
                     @foreach (var item in Model.ListaProduto)
                     {
-                        <option value="@item.Descricao">@item.Descricao</option>
+                        <option value="@item.ProdutoId,@item.Descricao,@item.Unidade,@item.ValorVenda">@item.Descricao</option>
                     }
                 </select>
                 <label asp-for="Quantidade" class="control-label">Quantidade</label>

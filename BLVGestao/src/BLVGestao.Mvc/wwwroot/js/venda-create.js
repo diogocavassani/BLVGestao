@@ -3,17 +3,48 @@
     var produtos = {};
     $("#btnAdicionarProduto").click(function () {
 
-        var teste = JSON.stringify($("#produto").val())
-        var produtoInput = JSON.parse($("#produto").val());
-    
+        //var teste = JSON.stringify($("#produto").val())
+        //var produtoInput = JSON.parse($("#produto")).val();
+
+        //nesta linha eu pego os valores do itens selecionados, na view existe o parametro values onde eu carrego o que quero passar para o js, depois eu quebro a string pela virgula e transformo 
+        //em um array  
+        produtosselecionado = $("#produto-selecionado option:selected").val();
+        produtoInput = produtosselecionado.split(",");
         
-        console.log(produtoInput);
-        console.log(teste);
-
-
 
         
         var bodyProdutos = "";
+        listaProdutos.push({
+            Codigo: produtoInput[0],
+            Descricao: produtoInput[1],
+            Quantidade: parseInt($("#quantidade").val()),
+            Unidade: produtoInput[2],
+            ValorVenda: produtoInput[3],
+            ValorTotal: 2
+        });
+
+        for (var i = 0; i < listaProdutos.length; i++) {
+            var produtoTabela = listaProdutos[i];
+            bodyProdutos += "<tr>";
+            bodyProdutos += `  <td>${produtoTabela.Codigo}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Descricao}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Quantidade}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Unidade}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.ValorVenda}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.ValorTotal}</td>`;
+        }
+        $("#tBodyProdutos").html(bodyProdutos);
+        $("#produto").val("");
+        $("#quantidade").val("");
+
+    });
+  
+})
+
+
+//BAckup
+/*
+ * var bodyProdutos = "";
         listaProdutos.push({
             Codigo: produtoInput.Codigo,
             Descricao: produtoInput.Descricao,
@@ -38,11 +69,7 @@
         $("#quantidade").val("");
 
     });
-
-})
-
-
-
+ */
 
 
 
