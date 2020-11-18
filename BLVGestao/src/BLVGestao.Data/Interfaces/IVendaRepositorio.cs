@@ -11,7 +11,7 @@ namespace BLVGestao.Data.Interfaces
         Task<ICollection<Venda>> ConsultarPorCliente(string nome);
         
         Task<ICollection<Venda>> ConsultarPorData(string data);
-        Task InserirVenda(Venda venda);
+        Task<bool> InserirVenda(Venda venda);
         Task AlterarVenda(Venda venda);
         Task<ICollection<Venda>> BuscarVendas();
         Task<Venda> BuscarPorIdCompleto(int id);

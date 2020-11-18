@@ -9,7 +9,8 @@ namespace BLVGestao.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ItemVenda> builder)
         {
-            builder.HasKey(iv => new { iv.VendaId, iv.ProdutoId });
+            //builder.HasKey(iv => new { iv.VendaId, iv.ProdutoId });
+            builder.HasKey(iv => iv.ItemVendaId);
             builder.HasOne(iv => iv.Venda).WithMany(v => v.ItensVendas).HasForeignKey(iv => iv.VendaId);
             builder.HasOne(iv => iv.Produto).WithMany(p => p.ItensVendas).HasForeignKey(iv => iv.ProdutoId);
         

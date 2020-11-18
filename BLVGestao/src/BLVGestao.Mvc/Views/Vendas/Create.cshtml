@@ -18,12 +18,12 @@
                 <div class="form-group">
                     <label asp-for="Cliente.PessoaId" class="control-label"></label>
                     @*<select asp-for="Cliente.PessoaId" class="form-control" asp-items="ViewBag.ClienteId"></select>*@
-                <select asp-for="ListaCliente" class="form-control" >
-                    @foreach (var item in Model.ListaCliente)
-                    {
-                        <option value="2">@item.Nome</option>
-                    }
-                </select>
+                    <select asp-for="ListaCliente" class="form-control" id="cliente-selecionado">
+                        @foreach (var item in Model.ListaCliente)
+                        {
+                            <option value="@item.PessoaId">@item.Nome</option>
+                        }
+                    </select>
 
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <h3 class="card-title">Total</h3>
             </div>
             <div class="card-body">
-                <h1>R$ 00,00</h1>
+                <h1 id="totalVenda">R$00,00</h1>
             </div>
         </div>
     </div>
@@ -96,9 +96,16 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label asp-for="FormaDePagamento.FormaDePagamentoId" class="control-label">Forma de pagamento</label>
-                    @*<select asp-for="FormaDePagamento.FormaDePagamentoId" class="form-control" asp-items="ViewBag.FornecedorId"></select>*@
-                    <a class="btn">Finalizar</a>
+                    <label asp-for="ListaFormaDePagamento" class="control-label">Forma de pagamento</label>
+                    <select asp-for="ListaFormaDePagamento" class="form-control" id="pagamento-selecionado">
+                        @foreach (var item in Model.ListaFormaDePagamento)
+                        {
+                            <option value="@item.FormaDePagamentoId">@item.Descricao</option>
+                        }
+                    </select>
+                    <label asp-for="ValorPagamento" class="control-label">Valor Pagamento</label>
+                    <input asp-for="ValorPagamento" class="form-control" id="valorPagamento" />
+                    <a class="btn" id="finalizarVenda">Finalizar</a>
                 </div>
             </div>
         </div>
@@ -111,6 +118,32 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    $('button').click(function () {
+        var valor = parseInt($(this).val());
+        //valor += 1;
+        listaProdutos.splice(valor, 1);
+        bodyProdutos = "";
+        for (var i = 0; i < listaProdutos.length; i++) {
+
+            var produtoTabela = listaProdutos[i];
+            bodyProdutos += "<tr>";
+            bodyProdutos += `  <td>${produtoTabela.Codigo}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Descricao}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Quantidade}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.Unidade}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.ValorUnitario}</td>`;
+            bodyProdutos += `  <td>${produtoTabela.ValorTotal}</td>`;
+            bodyProdutos += `  <td>
+                                    <button class="btn btn-success fa fa-plus removerProduto"  value="${i}">Remover</button>
+                               </td>`;
+
+            totalVenda += produtoTabela.ValorTotal
+        }
+        $("#tBodyProdutos").html(bodyProdutos);
+
+    });
+</script>
 }
 
 @*<form asp-action="Create">

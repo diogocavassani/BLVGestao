@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BLVGestao.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200910024227_AlteracaoPessoa")]
-    partial class AlteracaoPessoa
+    [Migration("20201113023630_InitialMmigration")]
+    partial class InitialMmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,15 +72,9 @@ namespace BLVGestao.Data.Migrations
                     b.Property<int>("PessoaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PessoaId1")
-                        .HasColumnType("int");
-
                     b.HasKey("EnderecoId");
 
                     b.HasIndex("PessoaId");
-
-                    b.HasIndex("PessoaId1")
-                        .IsUnique();
 
                     b.ToTable("Endereco");
                 });
@@ -139,7 +133,8 @@ namespace BLVGestao.Data.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Permissao")
                         .IsRequired()
@@ -152,14 +147,15 @@ namespace BLVGestao.Data.Migrations
 
             modelBuilder.Entity("BLVGestao.Domain.Model.ItemVenda", b =>
                 {
-                    b.Property<int>("VendaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutoId")
+                    b.Property<int>("ItemVendaId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
@@ -167,9 +163,14 @@ namespace BLVGestao.Data.Migrations
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("VendaId", "ProdutoId");
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemVendaId");
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaId");
 
                     b.ToTable("ItensVenda");
                 });
@@ -242,6 +243,9 @@ namespace BLVGestao.Data.Migrations
                     b.Property<string>("Observacao")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<decimal>("Quantidade")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("Unidade")
                         .IsRequired()
                         .HasColumnType("varchar(3)")
@@ -270,14 +274,10 @@ namespace BLVGestao.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Numero")
-                        .IsRequired()
                         .HasColumnType("varchar(13)")
                         .HasMaxLength(13);
 
                     b.Property<int>("PessoaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PessoaId1")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoTelefone")
@@ -286,9 +286,6 @@ namespace BLVGestao.Data.Migrations
                     b.HasKey("TelefoneId");
 
                     b.HasIndex("PessoaId");
-
-                    b.HasIndex("PessoaId1")
-                        .IsUnique();
 
                     b.ToTable("Telefone");
                 });
@@ -343,6 +340,9 @@ namespace BLVGestao.Data.Migrations
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
+
+                    b.Property<float>("ValorPagamento")
+                        .HasColumnType("float");
 
                     b.HasKey("VendaId");
 
@@ -418,10 +418,6 @@ namespace BLVGestao.Data.Migrations
                         .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BLVGestao.Domain.Model.Pessoa", null)
-                        .WithOne("Endereco")
-                        .HasForeignKey("BLVGestao.Domain.Model.Endereco", "PessoaId1");
                 });
 
             modelBuilder.Entity("BLVGestao.Domain.Model.Estoque", b =>
@@ -473,10 +469,6 @@ namespace BLVGestao.Data.Migrations
                         .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BLVGestao.Domain.Model.Pessoa", null)
-                        .WithOne("Telefone")
-                        .HasForeignKey("BLVGestao.Domain.Model.Telefone", "PessoaId1");
                 });
 
             modelBuilder.Entity("BLVGestao.Domain.Model.Usuario", b =>

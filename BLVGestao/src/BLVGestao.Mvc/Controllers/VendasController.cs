@@ -19,17 +19,19 @@ namespace BLVGestao.Mvc.Controllers
         private readonly IVendaRepositorio _vendaRepositorio;
         private readonly IProdutoRepositorio _produtoRepositorio;
         private readonly IClienteRepositorio _clienteRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IFormaDePagamentoRepositorio _formaDePagementoRepositorio;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
 
         public VendasController(IVendaRepositorio vendaRepositorio,IProdutoRepositorio produtoRepositorio,IClienteRepositorio clienteRepositorio,
-            IFormaDePagamentoRepositorio formaDePagamentoRepositorio,IUsuarioRepositorio usuarioRepositorio)
+            IFormaDePagamentoRepositorio formaDePagamentoRepositorio,IUsuarioRepositorio usuarioRepositorio, IPessoaRepositorio pessoaRepositorio)
         {
             _vendaRepositorio = vendaRepositorio;
             _produtoRepositorio = produtoRepositorio;
             _clienteRepositorio = clienteRepositorio;
             _formaDePagementoRepositorio = formaDePagamentoRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
        
@@ -54,23 +56,24 @@ namespace BLVGestao.Mvc.Controllers
             vendaViewModel.ListaCliente = await _clienteRepositorio.ListarAtivos();
             vendaViewModel.ListaProduto = await _produtoRepositorio.ListarAtivos();
             vendaViewModel.ListaFormaDePagamento = await _formaDePagementoRepositorio.ListarAtivos();
-
-            //var produtos = await _produtoRepositorio.ListarAtivos();
-            //var clientes = await _clienteRepositorio.ListarAtivos();
-            //var formaPagamento = await _formaDePagementoRepositorio.ListarAtivos();
-            //var usuario = await _usuarioRepositorio.ListarAtivos();
-            //ViewData["ProdutoId"] = new SelectList(produtos,"ProdutoId","Descricao");
-            //ViewData["ClienteId"] = new SelectList(clientes, "PessoaId", "Nome");
-            //ViewData["FormaDePagamentoId"] = new SelectList(formaPagamento,"FormaDePagamentoId","Descricao");
-            //ViewData["UsuarioId"] = new SelectList(usuario, "UsuarioId", "Login");
             return  View(vendaViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("ClienteId,ItensVenda,UsuarioId,FormaPagamentoId,Data,")]Venda venda)      
+        public async Task<IActionResult> Create([FromBody]VendaViewModel vendaViewModel)      
         {
-            
+            var venda = new Venda {
+                Cliente = await _clienteRepositorio.ListarPorId(vendaViewModel.Cliente.PessoaId),
+                ItensVendas = vendaViewModel.ItemVenda,
+                Total = vendaViewModel.TotalVenda,
+                FormaDePagamento = await _formaDePagementoRepositorio.ListarPorId(vendaViewModel.FormaDePagamento.FormaDePagamentoId),
+                ValorPagamento = vendaViewModel.ValorPagamento,
+                Usuario = await _usuarioRepositorio.ListarPorId(1),
+                Data = DateTime.Now,
+                Situacao = SituacaoVendaEnum.Confirmada
+            };
             await _vendaRepositorio.InserirVenda(venda);
+            
             return RedirectToAction(nameof(Index));
         }
 

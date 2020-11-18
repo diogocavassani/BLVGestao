@@ -27,14 +27,16 @@ namespace BLVGestao.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task InserirVenda(Venda venda)
+        public async Task<bool> InserirVenda(Venda venda)
         {
             _context.Set<Venda>().Add(venda);
-            foreach(ItemVenda item in venda.ItensVendas)
-            {
-                _context.Set<ItemVenda>().Add(item);
-            }
+            //foreach(ItemVenda item in venda.ItensVendas)
+            //{
+            //    _context.Set<ItemVenda>().Add(item);
+            //}
+            var teste = _context.SaveChangesAsync().Result;
             await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task AlterarVenda(Venda venda)

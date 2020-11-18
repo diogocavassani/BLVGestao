@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BLVGestao.Data.Migrations
 {
-    public partial class AlteracaoPessoa : Migration
+    public partial class InitialMmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace BLVGestao.Data.Migrations
                     GrupoAcessoId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Ativo = table.Column<bool>(nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Permissao = table.Column<string>(type: "varchar(50)", nullable: false)
                 },
                 constraints: table =>
@@ -92,8 +92,7 @@ namespace BLVGestao.Data.Migrations
                     PessoaId = table.Column<int>(nullable: false),
                     Logradouro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
                     Numero = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
-                    Bairro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
-                    PessoaId1 = table.Column<int>(nullable: true)
+                    Bairro = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,12 +103,6 @@ namespace BLVGestao.Data.Migrations
                         principalTable: "Pessoa",
                         principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Endereco_Pessoa_PessoaId1",
-                        column: x => x.PessoaId1,
-                        principalTable: "Pessoa",
-                        principalColumn: "PessoaId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,7 +117,8 @@ namespace BLVGestao.Data.Migrations
                     Observacao = table.Column<string>(nullable: true),
                     Unidade = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false),
                     ValorVenda = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    ValorCusto = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                    ValorCusto = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    Quantidade = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,9 +139,8 @@ namespace BLVGestao.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Ativo = table.Column<bool>(nullable: false),
                     PessoaId = table.Column<int>(nullable: false),
-                    Numero = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false),
-                    TipoTelefone = table.Column<int>(nullable: false),
-                    PessoaId1 = table.Column<int>(nullable: true)
+                    Numero = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: true),
+                    TipoTelefone = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,12 +151,6 @@ namespace BLVGestao.Data.Migrations
                         principalTable: "Pessoa",
                         principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Telefone_Pessoa_PessoaId1",
-                        column: x => x.PessoaId1,
-                        principalTable: "Pessoa",
-                        principalColumn: "PessoaId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +164,7 @@ namespace BLVGestao.Data.Migrations
                     FormaDePagamentoId = table.Column<int>(nullable: false),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    ValorPagamento = table.Column<float>(nullable: false),
                     Situacao = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -278,15 +266,17 @@ namespace BLVGestao.Data.Migrations
                 name: "ItensVenda",
                 columns: table => new
                 {
+                    ItemVendaId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<bool>(nullable: false),
                     VendaId = table.Column<int>(nullable: false),
                     ProdutoId = table.Column<int>(nullable: false),
-                    Ativo = table.Column<bool>(nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItensVenda", x => new { x.VendaId, x.ProdutoId });
+                    table.PrimaryKey("PK_ItensVenda", x => x.ItemVendaId);
                     table.ForeignKey(
                         name: "FK_ItensVenda_Produto_ProdutoId",
                         column: x => x.ProdutoId,
@@ -313,12 +303,6 @@ namespace BLVGestao.Data.Migrations
                 column: "PessoaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Endereco_PessoaId1",
-                table: "Endereco",
-                column: "PessoaId1",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Estoque_ProdutoId",
                 table: "Estoque",
                 column: "ProdutoId");
@@ -327,6 +311,11 @@ namespace BLVGestao.Data.Migrations
                 name: "IX_ItensVenda_ProdutoId",
                 table: "ItensVenda",
                 column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensVenda_VendaId",
+                table: "ItensVenda",
+                column: "VendaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movimentacoes_ProdutoId",
@@ -342,12 +331,6 @@ namespace BLVGestao.Data.Migrations
                 name: "IX_Telefone_PessoaId",
                 table: "Telefone",
                 column: "PessoaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Telefone_PessoaId1",
-                table: "Telefone",
-                column: "PessoaId1",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_GrupoAcessoId",

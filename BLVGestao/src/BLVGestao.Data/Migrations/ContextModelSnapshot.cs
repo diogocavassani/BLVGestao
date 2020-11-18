@@ -131,7 +131,8 @@ namespace BLVGestao.Data.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Permissao")
                         .IsRequired()
@@ -144,14 +145,15 @@ namespace BLVGestao.Data.Migrations
 
             modelBuilder.Entity("BLVGestao.Domain.Model.ItemVenda", b =>
                 {
-                    b.Property<int>("VendaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutoId")
+                    b.Property<int>("ItemVendaId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
@@ -159,9 +161,14 @@ namespace BLVGestao.Data.Migrations
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("VendaId", "ProdutoId");
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemVendaId");
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaId");
 
                     b.ToTable("ItensVenda");
                 });
@@ -265,7 +272,6 @@ namespace BLVGestao.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Numero")
-                        .IsRequired()
                         .HasColumnType("varchar(13)")
                         .HasMaxLength(13);
 
@@ -332,6 +338,9 @@ namespace BLVGestao.Data.Migrations
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
+
+                    b.Property<float>("ValorPagamento")
+                        .HasColumnType("float");
 
                     b.HasKey("VendaId");
 

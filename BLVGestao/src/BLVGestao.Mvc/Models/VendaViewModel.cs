@@ -10,16 +10,28 @@ namespace BLVGestao.Mvc.Models
 {
     public class VendaViewModel
     {
-        public Cliente Cliente { get; set; }
+        
         public ICollection<Cliente> ListaCliente { get; set; }
         public Produto Produto { get; set; }
         public ICollection<Produto> ListaProduto { get; set; }
         public decimal Quantidade { get; set; }
-        public ICollection<ItemVenda> ItemVenda { get; set; }
-        public FormaDePagamento FormaDePagamento { get; set; }
+       
+        
         public ICollection<FormaDePagamento> ListaFormaDePagamento { get; set; }
-        public decimal ValorPagamento { get; set; }
-        public decimal TrocoPagamento { get; set; }
+
+       
+        
+        public float ValorTroco { get; set; }
+
+
+        public Cliente Cliente { get; set; }
+        public IList<ItemVenda> ItemVenda { get; set; }
+        public float TotalVenda { get; set; }
+        public FormaDePagamento FormaDePagamento { get; set; }
+        public float ValorPagamento { get; set; }
+
+
+
 
 
 

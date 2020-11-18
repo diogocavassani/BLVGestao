@@ -7,7 +7,7 @@ namespace BLVGestao.Domain.Model
 {
     public class Venda
     {
-        public Venda(int vendaId, int clienteId, int usuarioId, int formaDePagamentoId, DateTime data, decimal total, SituacaoVendaEnum situacao)
+        public Venda(int vendaId, int clienteId, int usuarioId, int formaDePagamentoId, DateTime data, float total, SituacaoVendaEnum situacao)
         {
             VendaId = vendaId;
             ClienteId = clienteId;
@@ -27,7 +27,8 @@ namespace BLVGestao.Domain.Model
         public int UsuarioId { get; set; }
         public int FormaDePagamentoId { get; set; }
         public DateTime Data { get; set; }
-        public decimal Total { get; set; }
+        public float Total { get; set; }
+        public float ValorPagamento { get; set; }
         public SituacaoVendaEnum Situacao { get; set; }
         public void Cancelar()
         {
