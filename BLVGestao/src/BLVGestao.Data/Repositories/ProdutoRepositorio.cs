@@ -17,7 +17,30 @@ namespace BLVGestao.Data.Repositories
 
         async public Task<ICollection<Produto>> ListarAtivos()
         {
-            return await _context.Produtos.Where(p => p.Ativo == true).AsNoTracking().ToListAsync();
+            return await _context.Produtos.Where(p => p.Ativo == true).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+        }
+
+
+
+        public async Task<ICollection<Produto>> ListarPorFornecedor(int fornecedorId)
+        {
+            return await _context.Produtos.Where(p => p.FornecedorId == fornecedorId).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ICollection<Produto>> ListarPorNome(string descricao)
+        {
+            return await _context.Produtos.Where(p => p.Descricao == descricao).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ICollection<Produto>> ListarPorStatus(bool status)
+        {
+
+            return await _context.Produtos.Where(p => p.Ativo == status).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+        }
+
+        public Task<ICollection<Produto>> ListarPorValidade()
+        {
+            throw new NotImplementedException();
         }
     }
 }

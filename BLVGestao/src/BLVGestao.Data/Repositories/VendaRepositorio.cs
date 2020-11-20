@@ -17,14 +17,11 @@ namespace BLVGestao.Data.Repositories
         {
 
         }
-        public Task<ICollection<Venda>> ConsultarPorData(string data)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<ICollection<Venda>> ConsultarPorCliente(string nome)
+
+        public async Task<ICollection<Venda>> ConsultarPorCliente(string nome)
         {
-            throw new NotImplementedException();
+            return await _context.Vendas.Where(v => v.Cliente.Nome.ToLower().Contains(nome.ToLower())).Include(v => v.Cliente).AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> InserirVenda(Venda venda)
@@ -60,6 +57,39 @@ namespace BLVGestao.Data.Repositories
             var vendas= await _context.Vendas.Where(v=>v.VendaId==id).Include(v => v.Cliente).Include(v => v.Usuario).Include(v => v.FormaDePagamento).AsNoTracking().FirstOrDefaultAsync();
             vendas.ItensVendas = itensvenda;
             return vendas;
+        }
+
+        public async Task<ICollection<Venda>> ConsultarPorData(string datainicial, string datafinal)
+        {
+            DateTime datafiltro1 = DateTime.Parse(datainicial);
+            DateTime datafiltro2 = DateTime.Parse(datafinal);
+
+            datafiltro2 = datafiltro2.AddHours(23);
+
+            return await _context.Vendas.Where(v => v.Data >= datafiltro1 && v.Data <= datafiltro2).Include(v => v.Cliente).Include(v=>v.FormaDePagamento).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ICollection<Venda>> BuscarPorFormaPagamento(int formaPagamentoId)
+        {
+            return await _context.Vendas.Where(v => v.FormaDePagamentoId == formaPagamentoId).Include(v => v.Cliente).Include(v => v.FormaDePagamento).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ICollection<Venda>> BuscarPorProduto(string produto)
+        {
+            var itens = await _context.ItensVenda.Where(i => i.Produto.Descricao.ToLower().Contains(produto.ToLower())).AsNoTracking().ToListAsync();
+            ICollection<Venda> lista = new List<Venda>();
+            Venda vendalocal = new Venda();
+            foreach (ItemVenda venda in itens)
+            {
+                vendalocal = await _context.Vendas.AsNoTracking().Include(v => v.Cliente).Include(v=> v.FormaDePagamento).FirstOrDefaultAsync(v => v.VendaId == venda.VendaId);
+                lista.Add(vendalocal);
+            }
+            return lista;
+        }
+
+        public async Task<ICollection<Venda>> BuscarPorSituacao(SituacaoVendaEnum stiaucao)
+        {
+            return await _context.Vendas.Where(v => v.Situacao == stiaucao).Include(v => v.Cliente).AsNoTracking().Include(v => v.FormaDePagamento).ToListAsync();
         }
     }
 }

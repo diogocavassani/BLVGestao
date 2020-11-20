@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 namespace BLVGestao.Mvc
 {
     public class Startup
@@ -38,7 +39,8 @@ namespace BLVGestao.Mvc
             services.AddScoped<IFormaDePagamentoRepositorio, FormaDePagamentoRepositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IVendaRepositorio, VendaRepositorio>();
-         
+            services.AddScoped<IContaReceberRepositorio, ContaReceberRepositorio>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +71,7 @@ namespace BLVGestao.Mvc
                     //pattern: "{controller=Usuarios}/{action=LogarUsuario}/{id?}");
                 pattern: "{controller=Vendas}/{action=Create}/{id?}");
         });
+            
         }
     }
 }

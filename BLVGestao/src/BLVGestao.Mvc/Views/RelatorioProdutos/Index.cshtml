@@ -1,0 +1,122 @@
+﻿@model IEnumerable<BLVGestao.Domain.Model.Produto>
+@{
+    ViewData["Title"] = "RelatorioProdutos";
+
+
+}
+
+
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <form action="Listar" method="post">
+        <h1 class="m-0 text-dark">Consulta de Produtos</h1>
+        <div class="input-group input-group-sm">
+
+            <input class="form-control form-control-navbar" type="search" name="filtro" placeholder="Digite a busca" aria-label="Filtro">
+
+            <label class="control-label"></label>
+
+            <select name="campo">
+                <option value="Todos">Todos</option>
+                <option value="Fornecedor">FornecedorId</option>
+                <option value="CodigoProduto">ProdutoId</option>
+                <option value="Validade">Validade</option>
+                <option value="NomeProduto">Descrição do Produto</option>
+                <option value="Ativo">Ativo</option>
+                <option value="NaoAtivo">Não ativos</option>
+            </select>
+
+            <button class="btn btn-primary" type="submit" value="Listar">
+                Buscar
+            </button>
+            <button class="btn btn-primary" onclick="createPDF()">
+                ExportarParaPDF
+            </button>
+        </div>
+    </form>
+
+</div>
+<div id="tab">
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    FornecedorId
+                </th>
+                <th>
+                    Valor Custo
+                </th>
+                <th>
+                    Valor Venda
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProdutoId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FornecedorId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorCusto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorVenda)
+                        </td>
+
+                    </tr>
+                }}
+
+        </tbody>
+
+    </table>
+</div>
+<script>
+    function createPDF() {
+        var sTable = document.getElementById('tab').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Produtos</title>');   
+        win.document.write(style);          
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);        
+        win.document.write('</body></html>');
+
+        win.document.close();   
+
+        win.print();    
+    }
+</script>
+
+
