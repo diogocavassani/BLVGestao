@@ -27,10 +27,6 @@ namespace BLVGestao.Data.Repositories
         public async Task<bool> InserirVenda(Venda venda)
         {
             _context.Set<Venda>().Add(venda);
-            //foreach(ItemVenda item in venda.ItensVendas)
-            //{
-            //    _context.Set<ItemVenda>().Add(item);
-            //}
             var teste = _context.SaveChangesAsync().Result;
             await _context.SaveChangesAsync();
             return true;

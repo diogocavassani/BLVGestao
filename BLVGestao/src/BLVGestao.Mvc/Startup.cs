@@ -68,8 +68,8 @@ namespace BLVGestao.Mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    //pattern: "{controller=Usuarios}/{action=LogarUsuario}/{id?}");
-                pattern: "{controller=Vendas}/{action=Create}/{id?}");
+                    pattern: "{controller=Usuarios}/{action=LogarUsuario}/{id?}");
+                //pattern: "{controller=Vendas}/{action=Create}/{id?}");
         });
             
         }
