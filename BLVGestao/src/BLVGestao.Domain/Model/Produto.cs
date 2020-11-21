@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BLVGestao.Domain.Model
@@ -33,7 +34,7 @@ namespace BLVGestao.Domain.Model
         public float ValorVenda { get; set; }
         public decimal ValorCusto { get; set; }
         public decimal Quantidade { get; set; }
-
+        public DateTime Validade { get; set; }
         public virtual ICollection<ItemVenda> ItensVendas { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public ICollection<Movimentacao> Movimentacao{ get; set; }

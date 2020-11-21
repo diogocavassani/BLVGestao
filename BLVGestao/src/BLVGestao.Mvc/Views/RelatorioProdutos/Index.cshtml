@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BLVGestao.Domain.Model.Produto>
 @{
     ViewData["Title"] = "RelatorioProdutos";
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
@@ -9,28 +9,36 @@
 <div class="content-header container-fluid row mb-2 col-sm-6">
     <form action="Listar" method="post">
         <h1 class="m-0 text-dark">Consulta de Produtos</h1>
-        <div class="input-group input-group-sm">
+        <div class="form-row align-items-center">
+            <div class="col-4">
+                <input class="form-control form-control-navbar" type="search" name="filtro" placeholder="Digite a busca" aria-label="Filtro">
+            </div>
 
-            <input class="form-control form-control-navbar" type="search" name="filtro" placeholder="Digite a busca" aria-label="Filtro">
 
             <label class="control-label"></label>
+            <div class="col-3">
+                <select name="campo" class="form-control">
+                    <option value="Todos">Todos</option>
+                    <option value="Fornecedor">ID do Fornecedor</option>
+                    <option value="CodigoProduto">ID do Produto</option>
+                    <option value="Validade">Validade</option>
+                    <option value="NomeProduto">Descrição do Produto</option>
+                    <option value="Ativo">Ativo</option>
+                    <option value="NaoAtivo">Não ativos</option>
+                </select>
+            </div>
 
-            <select name="campo">
-                <option value="Todos">Todos</option>
-                <option value="Fornecedor">FornecedorId</option>
-                <option value="CodigoProduto">ProdutoId</option>
-                <option value="Validade">Validade</option>
-                <option value="NomeProduto">Descrição do Produto</option>
-                <option value="Ativo">Ativo</option>
-                <option value="NaoAtivo">Não ativos</option>
-            </select>
+            <div class="col-2">
+                <button class="btn btn-primary mb-2" type="submit" value="Listar">
+                    Buscar
+                </button>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary mb-2" onclick="createPDF()">
+                    ExportarParaPDF
+                </button>
+            </div>
 
-            <button class="btn btn-primary" type="submit" value="Listar">
-                Buscar
-            </button>
-            <button class="btn btn-primary" onclick="createPDF()">
-                ExportarParaPDF
-            </button>
         </div>
     </form>
 
@@ -56,6 +64,9 @@
                 </th>
                 <th>
                     Valor Venda
+                </th>
+                <th>
+                    Validade
                 </th>
 
             </tr>
@@ -84,6 +95,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ValorVenda)
                         </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Validade)
+                        </td>
 
                     </tr>
                 }}
@@ -102,20 +116,20 @@
         style = style + "padding: 2px 3px;text-align: center;}";
         style = style + "</style>";
 
-        
+
         var win = window.open('', '', 'height=700,width=700');
 
         win.document.write('<html><head>');
-        win.document.write('<title>Produtos</title>');   
-        win.document.write(style);          
+        win.document.write('<title>Produtos</title>');
+        win.document.write(style);
         win.document.write('</head>');
         win.document.write('<body>');
-        win.document.write(sTable);        
+        win.document.write(sTable);
         win.document.write('</body></html>');
 
-        win.document.close();   
+        win.document.close();
 
-        win.print();    
+        win.print();
     }
 </script>
 

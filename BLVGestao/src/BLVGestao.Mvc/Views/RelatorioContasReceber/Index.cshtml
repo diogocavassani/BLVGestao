@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<BLVGestao.Domain.Model.ContaReceber>
 @{
     ViewData["Title"] = "RelatorioContasReceber";
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 }
 
@@ -9,26 +10,34 @@
 <div class="content-header container-fluid row mb-2 col-sm-6">
     <form action="Listar" method="post">
         <h1 class="m-0 text-dark">Consulta de Contas  a Receber</h1>
-        <div class="input-group input-group-sm">
+        <div class="form-row align-items-center">
+            <div class="col-4">
+                <input class="form-control form-control-navbar" type="search" name="filtro" placeholder="Digite a busca" aria-label="Filtro">
+            </div>
 
-            <input class="form-control form-control-navbar" type="search" name="filtro" placeholder="Digite a busca" aria-label="Filtro">
 
             <label class="control-label"></label>
+            <div class="col-3">
+                <select name="campo" class="form-control">
+                    <option value="Compra">Data da Compra</option>
+                    <option value="Vencimento">Data de Vencimento</option>
+                    <option value="CodigoCliente"> Id do Cliente</option>
+                    <option value="Cliente">Cliente</option>
 
-            <select name="campo">
-                <option value="Compra">DataCompra</option>
-                <option value="Vencimento">DataVencimento</option>
-                <option value="CodigoCliente">ClienteId</option>
-                <option value="Cliente">Cliente</option>
-                
-            </select>
+                </select>
+            </div>
 
-            <button class="btn btn-primary" type="submit" value="Listar">
-                Buscar
-            </button>
-            <button class="btn btn-primary" onclick="createPDF()">
-                ExportarParaPDF
-            </button>
+            <div class="col-2">
+                <button class="btn btn-primary mb-2" type="submit" value="Listar">
+                    Buscar
+                </button>
+            </div>
+            <div class=" col-1">
+                <button class="btn btn-primary mb-2" onclick="createPDF()">
+                    ExportarParaPDF
+                </button>
+            </div>
+
         </div>
     </form>
 
@@ -79,11 +88,11 @@
                             @Html.DisplayFor(modelItem => item.VendaId)
                         </td>
                         <td>
-                             @Html.DisplayFor(modelItem => item.Venda.Data)
+                            @Html.DisplayFor(modelItem => item.Venda.Data)
                         </td>
-                       <td>
-                           @data
-                       </td>
+                        <td>
+                            @data
+                        </td>
                     </tr>
                 }}
 

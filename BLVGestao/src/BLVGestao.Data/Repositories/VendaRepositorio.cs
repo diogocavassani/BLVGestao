@@ -18,10 +18,9 @@ namespace BLVGestao.Data.Repositories
 
         }
 
-
         public async Task<ICollection<Venda>> ConsultarPorCliente(string nome)
         {
-            return await _context.Vendas.Where(v => v.Cliente.Nome.ToLower().Contains(nome.ToLower())).Include(v => v.Cliente).AsNoTracking().ToListAsync();
+            return await _context.Vendas.Where(v => v.Cliente.Nome.ToLower().Contains(nome.ToLower())).Include(v => v.Cliente).Include(v=>v.FormaDePagamento).AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> InserirVenda(Venda venda)
@@ -65,9 +64,9 @@ namespace BLVGestao.Data.Repositories
             return await _context.Vendas.Where(v => v.Data >= datafiltro1 && v.Data <= datafiltro2).Include(v => v.Cliente).Include(v=>v.FormaDePagamento).AsNoTracking().ToListAsync();
         }
 
-        public async Task<ICollection<Venda>> BuscarPorFormaPagamento(int formaPagamentoId)
+        public async Task<ICollection<Venda>> BuscarPorFormaPagamento(string filtro)
         {
-            return await _context.Vendas.Where(v => v.FormaDePagamentoId == formaPagamentoId).Include(v => v.Cliente).Include(v => v.FormaDePagamento).AsNoTracking().ToListAsync();
+            return await _context.Vendas.Where(v => v.FormaDePagamento.Descricao.ToLower().Contains(filtro.ToLower())).Include(v => v.Cliente).Include(v => v.FormaDePagamento).AsNoTracking().ToListAsync();
         }
 
         public async Task<ICollection<Venda>> BuscarPorProduto(string produto)
@@ -83,9 +82,9 @@ namespace BLVGestao.Data.Repositories
             return lista;
         }
 
-        public async Task<ICollection<Venda>> BuscarPorSituacao(SituacaoVendaEnum stiaucao)
+        public async Task<ICollection<Venda>> BuscarPorSituacao(SituacaoVendaEnum situacao)
         {
-            return await _context.Vendas.Where(v => v.Situacao == stiaucao).Include(v => v.Cliente).AsNoTracking().Include(v => v.FormaDePagamento).ToListAsync();
+            return await _context.Vendas.Where(v => v.Situacao == situacao).Include(v => v.Cliente).AsNoTracking().Include(v => v.FormaDePagamento).ToListAsync();
         }
     }
 }

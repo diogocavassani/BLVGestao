@@ -13,7 +13,7 @@ namespace Diofab.BLVGestao.Data.Mapping
             builder.Property(vv => vv.ValorVenda).HasColumnType("decimal(10,2)").IsRequired();
             builder.Property(vc => vc.ValorCusto).HasColumnType("decimal(10,2)").IsRequired();
             builder.Property(a => a.Ativo).HasColumnType("bool");
-
+            builder.Property(vv => vv.Validade).HasColumnType("datetime").IsRequired();
             builder.HasOne(p => p.Fornecedor).WithMany(f => f.Produtos)
                 .HasForeignKey(p => p.FornecedorId);
 

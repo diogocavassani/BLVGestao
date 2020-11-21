@@ -26,10 +26,14 @@ namespace BLVGestao.Data.Repositories
         {
             return await _context.Produtos.Where(p => p.FornecedorId == fornecedorId).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
         }
+        public async Task<ICollection<Produto>> ListarPorIdCompleto(int id)
+        {
+            return await _context.Produtos.Where(p => p.ProdutoId == id).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+        }
 
         public async Task<ICollection<Produto>> ListarPorNome(string descricao)
         {
-            return await _context.Produtos.Where(p => p.Descricao == descricao).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+            return await _context.Produtos.Where(p => p.Descricao.ToLower().Contains(descricao)).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
         }
 
         public async Task<ICollection<Produto>> ListarPorStatus(bool status)
@@ -38,9 +42,11 @@ namespace BLVGestao.Data.Repositories
             return await _context.Produtos.Where(p => p.Ativo == status).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
         }
 
-        public Task<ICollection<Produto>> ListarPorValidade()
+        public async Task<ICollection<Produto>> ListarPorValidade(string data)
         {
-            throw new NotImplementedException();
+            DateTime filtro = DateTime.Parse(data);
+            return await _context.Produtos.Where(p => p.Validade >= filtro && p.Validade <= filtro.AddHours(23)).Include(p => p.Fornecedor).AsNoTracking().ToListAsync();
+
         }
     }
 }

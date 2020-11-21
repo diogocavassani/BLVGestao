@@ -28,23 +28,23 @@ namespace BLVGestao.Mvc.Controllers
             if (campo == "Compra" && filtro != null && filtro != "")
             {
                 var resultado = await _contaReceberRepositorio.ConsultarPorData(filtro);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
             else if (campo == "Vencimento" && filtro != null && filtro != "")
             {
                 var resultado = await _contaReceberRepositorio.ConsultarPorVencimento(filtro);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
             else if (campo == "CodigoCliente" && filtro != null && filtro != "")
             {
                 int id = int.Parse(filtro);
                 var resultado = await _contaReceberRepositorio.ConsultarPorCodigoCliente(id);
-                
+
                 return View("Index", resultado);
             }
             else if (campo == "Cliente" && filtro != null && filtro != "")
             {
-                
+
                 var resultado = await _contaReceberRepositorio.ConsultarPorCliente(filtro);
                 return View("Index", resultado);
             }
@@ -53,7 +53,7 @@ namespace BLVGestao.Mvc.Controllers
                 return View("Index");
         }
 
-            public async Task<IActionResult> ListarContasPorCliente(string nome)
+        public async Task<IActionResult> ListarContasPorCliente(string nome)
         {
             var resultado = await _contaReceberRepositorio.ConsultarPorCliente(nome);
             return View(resultado);

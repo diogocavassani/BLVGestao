@@ -23,17 +23,17 @@ namespace BLVGestao.Mvc.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Listar(string filtro1,string? filtro2, string campo)
+        public async Task<IActionResult> Listar(string filtro1, string? filtro2, string campo)
         {
             if (campo == "Periodo" && filtro1 != null && filtro1 != "" && filtro2 != null && filtro2 != "")
             {
                 var resultado = await _vendaRepositorio.ConsultarPorData(filtro1, filtro2);
                 return View("Index", resultado);
             }
-            else if (campo == "FormaPagamento" && filtro1 != null && filtro1 != "")
+            else if (campo == "FormadePagamento" && filtro1 != null && filtro1 != "")
             {
-                int id = int.Parse(filtro1);
-                var resultado = await _vendaRepositorio.BuscarPorFormaPagamento(id);
+
+                var resultado = await _vendaRepositorio.BuscarPorFormaPagamento(filtro1);
                 return View("Index", resultado);
             }
             else if (campo == "Cliente" && filtro1 != null && filtro1 != "")
@@ -46,26 +46,26 @@ namespace BLVGestao.Mvc.Controllers
                 var resultado = await _vendaRepositorio.BuscarPorProduto(filtro1);
                 return View("Index", resultado);
             }
-            else if (campo == "Ativo" )
+            else if (campo == "Confirmadas")
             {
                 SituacaoVendaEnum status = SituacaoVendaEnum.Confirmada;
 
                 var resultado = await _vendaRepositorio.BuscarPorSituacao(status);
-                return View(resultado);
+                return View("Index", resultado);
             }
-            else if (campo == "NaoAtivo")
+            else if (campo == "Canceladas")
             {
                 SituacaoVendaEnum status = SituacaoVendaEnum.Cancelada;
 
                 var resultado = await _vendaRepositorio.BuscarPorSituacao(status);
-                return View(resultado);
+                return View("Index", resultado);
             }
             else
                 return View("index");
         }
-            public async Task<IActionResult> ListarVendas(int id)
+        public async Task<IActionResult> ListarVendas(string filtro)
         {
-            var resultado = await _vendaRepositorio.BuscarPorFormaPagamento(id);
+            var resultado = await _vendaRepositorio.BuscarPorFormaPagamento(filtro);
             return View(resultado);
         }
         public async Task<IActionResult> ListarVendasPorData(string datainicial, string datafinal)

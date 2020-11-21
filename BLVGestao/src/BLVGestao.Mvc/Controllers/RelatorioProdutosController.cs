@@ -20,50 +20,50 @@ namespace BLVGestao.Mvc.Controllers
         {
             _produtoRepositorio = produtoRepositorio;
         }
-        
+
         public IActionResult Index()
         {
             return View();
         }
         public async Task<IActionResult> Listar(string filtro, string campo)
         {
-            if(campo== "Todos")
+            if (campo == "Todos")
             {
                 var resultado = await _produtoRepositorio.ListarTodos();
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
-            else if(campo == "Fornecedor"&&filtro!=null&&filtro!="")
+            else if (campo == "Fornecedor" && filtro != null && filtro != "")
             {
                 int fornecedorId = int.Parse(filtro);
                 var resultado = await _produtoRepositorio.ListarPorFornecedor(fornecedorId);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
-            else if (campo =="CodigoProduto" && filtro != null && filtro != "") 
+            else if (campo == "CodigoProduto" && filtro != null && filtro != "")
             {
                 int id = int.Parse(filtro);
-                var resultado = await _produtoRepositorio.ListarPorId(id);
-                return View("Index",resultado);
+                var resultado = await _produtoRepositorio.ListarPorIdCompleto(id);
+                return View("Index", resultado);
             }
-            else if (campo== "Validade" && filtro != null && filtro != "")
+            else if (campo == "Validade" && filtro != null && filtro != "")
             {
-                var resultado = await _produtoRepositorio.ListarPorValidade();
-                return View("Index");
+                var resultado = await _produtoRepositorio.ListarPorValidade(filtro);
+                return View("Index", resultado);
             }
             else if (campo == "NomeProduto" && filtro != null && filtro != "")
             {
 
                 var resultado = await _produtoRepositorio.ListarPorNome(filtro);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
             else if (campo == "Ativo")
             {
                 var resultado = await _produtoRepositorio.ListarPorStatus(true);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
-            else if (campo =="NaoAtivo")
+            else if (campo == "NaoAtivo")
             {
                 var resultado = await _produtoRepositorio.ListarPorStatus(false);
-                return View("Index",resultado);
+                return View("Index", resultado);
             }
 
             else
@@ -86,7 +86,7 @@ namespace BLVGestao.Mvc.Controllers
         }
         public async Task<IActionResult> ListarProdutosPorValidade(string data)
         {
-            var resultado = await _produtoRepositorio.ListarPorValidade();
+            var resultado = await _produtoRepositorio.ListarPorValidade(data);
             return View();
         }
         public async Task<IActionResult> ListarProdutosPorDescricao(string descricao)
@@ -99,7 +99,7 @@ namespace BLVGestao.Mvc.Controllers
             var resultado = await _produtoRepositorio.ListarPorStatus(status);
             return View(resultado);
         }
-        
-       
+
+
     }
 }

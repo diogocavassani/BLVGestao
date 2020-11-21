@@ -20,7 +20,7 @@ namespace BLVGestao.Data.Repositories
         {
             return await _context.ContasReceber.Where(c => c.Cliente.Nome.ToLower().Contains(nome.ToLower())).Include(c => c.Cliente).Include(c => c.Venda).AsNoTracking().ToListAsync();
         }
-        
+
 
         public async Task<ICollection<ContaReceber>> ConsultarPorCodigoCliente(int id)
         {
@@ -40,14 +40,14 @@ namespace BLVGestao.Data.Repositories
         public async Task<ICollection<ContaReceber>> ConsultarPorData(string data)
         {
             DateTime datafiltro1 = DateTime.Parse(data);
-            return await _context.ContasReceber.Where(c => c.Venda.Data >= datafiltro1&&c.Venda.Data<= datafiltro1.AddHours(23)).Include(c => c.Cliente).Include(c => c.Venda).AsNoTracking().ToListAsync();
+            return await _context.ContasReceber.Where(c => c.Venda.Data >= datafiltro1 && c.Venda.Data <= datafiltro1.AddHours(23)).Include(c => c.Cliente).Include(c => c.Venda).AsNoTracking().ToListAsync();
         }
 
         public async Task<ICollection<ContaReceber>> ConsultarPorVencimento(string data)
         {
             DateTime datafiltro1 = DateTime.Parse(data);
             datafiltro1.AddDays(30);
-            return await _context.ContasReceber.Where(c => c.Venda.Data.AddDays(30) >= datafiltro1&&c.Venda.Data.AddDays(30) <=datafiltro1.AddHours(23)).Include(c => c.Cliente).Include(c => c.Venda).AsNoTracking().ToListAsync();
+            return await _context.ContasReceber.Where(c => c.Venda.Data.AddDays(30) >= datafiltro1 && c.Venda.Data.AddDays(30) <= datafiltro1.AddHours(23)).Include(c => c.Cliente).Include(c => c.Venda).AsNoTracking().ToListAsync();
         }
     }
 }

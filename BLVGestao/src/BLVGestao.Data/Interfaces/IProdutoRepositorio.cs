@@ -8,8 +8,9 @@ namespace BLVGestao.Data.Interfaces
     {
         Task<ICollection<Produto>> ListarAtivos();
         Task<ICollection<Produto>> ListarPorFornecedor(int fornecedorId);
-        Task<ICollection<Produto>> ListarPorValidade();
+        Task<ICollection<Produto>> ListarPorValidade(string data);
         Task<ICollection<Produto>> ListarPorNome(string descricao);
         Task<ICollection<Produto>> ListarPorStatus(bool status);
+        Task<ICollection<Produto>> ListarPorIdCompleto(int id);
     }
 }

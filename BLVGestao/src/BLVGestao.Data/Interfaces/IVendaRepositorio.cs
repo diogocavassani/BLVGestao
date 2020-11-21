@@ -16,9 +16,9 @@ namespace BLVGestao.Data.Interfaces
         Task AlterarVenda(Venda venda);
         Task<ICollection<Venda>> BuscarVendas();
         Task<Venda> BuscarPorIdCompleto(int id);
-        Task<ICollection<Venda>> BuscarPorFormaPagamento(int formaPagamentoId);
+        Task<ICollection<Venda>> BuscarPorFormaPagamento(string filtro);
 
         Task<ICollection<Venda>> BuscarPorProduto(string produto);
-        Task<ICollection<Venda>> BuscarPorSituacao(SituacaoVendaEnum stiaucao);
+        Task<ICollection<Venda>> BuscarPorSituacao(SituacaoVendaEnum situacao);
     }
 }

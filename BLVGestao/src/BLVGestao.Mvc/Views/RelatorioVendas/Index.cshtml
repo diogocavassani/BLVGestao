@@ -1,36 +1,54 @@
 ﻿@model IEnumerable<BLVGestao.Domain.Model.Venda>
 @{
     ViewData["Title"] = "RelatorioVendas";
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
 
 <div class="content-header container-fluid row mb-2 col-sm-6">
     <form action="Listar" method="post">
-        <h1 class="m-0 text-dark">Consulta de Vendas</h1>
-        <div class="input-group input-group-sm">
+        <div class="form-row align-itens-center">
+            <h1 class="m-0 text-dark">Consulta de Vendas</h1>
+            <div class="form-row align-items-center">
 
-            <input class="form-control form-control-navbar" type="search" name="filtro1" placeholder="Digite a busca" aria-label="Filtro">
-            <input class="form-control form-control-navbar" type="search" name="filtro2" placeholder="Insira o segundo intervalo de vendas EX: 10/10/2020" aria-label="Filtro">
-            <label class="control-label"></label>
+                <div class="col-3">
+                    <input class="form-control form-control-navbar" type="search" name="filtro1" placeholder="Insira o filtro" aria-label="Filtro">
+                </div>
+                <div class="col-3">
+                    <input class="form-control form-control-navbar" type="search" name="filtro2" placeholder="Insira a 2ª Data" aria-label="Filtro">
+                </div>
+                <label class="control-label"></label>
 
-            <select name="campo">
-                
-                <option value="Periodo">Periodo</option>
-                <option value="FormadePagamento">FormaPagamentoIdId</option>
-                <option value="Cliente">NomeCliente</option>
-                <option value="Produto">Produto</option>                
-                <option value="Ativo">Ativo</option>
-                <option value="NaoAtivo">Não ativos</option>
-            </select>
 
-            <button class="btn btn-primary" type="submit" value="Listar">
-                Buscar
-            </button>
-            <button class="btn btn-primary" onclick="createPDF()">
-                ExportarParaPDF
-            </button>
+
+                <div class="col-3">
+                    <select name="campo" class="form-control">
+
+                        <option value="Periodo">Periodo</option>
+                        <option value="FormadePagamento">Forma de Pagamento</option>
+                        <option value="Cliente">Nome Cliente</option>
+                        <option value="Produto">Produto</option>
+                        <option value="Confirmadas">Confirmadas</option>
+                        <option value="Canceladas">Canceladas</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-2">
+                    <button class="btn btn-primary mb-2" type="submit" value="Listar">
+                        Buscar
+                    </button>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary mb-2" onclick="createPDF()">
+                        ExportarParaPDF
+                    </button>
+                </div>
+
+
+            </div>
         </div>
     </form>
 
@@ -46,12 +64,12 @@
                     Data
                 </th>
                 <th>
-                    Forma Pagamento
+                    Forma de Pagamento
                 </th>
                 <th>
                     Cliente
                 </th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -72,7 +90,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Cliente.Nome)
                         </td>
-                       
 
                     </tr>
                 }}
@@ -91,20 +108,20 @@
         style = style + "padding: 2px 3px;text-align: center;}";
         style = style + "</style>";
 
-        
+
         var win = window.open('', '', 'height=700,width=700');
 
         win.document.write('<html><head>');
-        win.document.write('<title>Vendas</title>');   
-        win.document.write(style);          
+        win.document.write('<title>Vendas</title>');
+        win.document.write(style);
         win.document.write('</head>');
         win.document.write('<body>');
-        win.document.write(sTable);         
+        win.document.write(sTable);
         win.document.write('</body></html>');
 
-        win.document.close();   
+        win.document.close();
 
-        win.print();   
+        win.print();
     }
 </script>
 
