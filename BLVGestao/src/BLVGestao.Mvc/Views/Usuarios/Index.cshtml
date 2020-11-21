@@ -4,20 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-    <div class="content-header container-fluid row mb-2 col-sm-6">
-        <h1 class="m-0 text-dark">Usuario</h1>
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="UsuarioId ">
-            <input class="form-control form-control-navbar" type="search" placeholder="Login" aria-label="Login">
-            <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
+<div class="content-header container-fluid row mb-2 col-sm-6">
+    <h1 class="m-0 text-dark">Usuario</h1>
+    @*<div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Codigo" aria-label="UsuarioId ">
+        <input class="form-control form-control-navbar" type="search" placeholder="Login" aria-label="Login">
+        <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+        </button>*@
 
-        </div>
-        <button class="btn btn-outline-success">
-            <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
-        </button>
-    </div>
+</div>
+<div>
+    <button class="btn btn-outline-success">
+        <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
+    </button>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -28,36 +29,37 @@
                 @Html.DisplayNameFor(model => model.Senha)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GrupoAcesso.Descricao)
+                Grupo de Acesso
             </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrupoAcesso.Descricao)
-            </td>
-            <td>
-                <button type="button" class="btn btn-warning fa fa-pencil">
-                    <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.UsuarioId">Editar</a>
-                </button>
-                <button type="button" class="btn btn-info fa fa-search">
-                    <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.UsuarioId">Detalhes</a>
-                </button>
-                <button type="button" class="btn btn-danger fa fa-trash">
-                    <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.UsuarioId">Excluir</a>
-                </button>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Senha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrupoAcesso.Descricao)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning fa fa-pencil">
+                        <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.UsuarioId">Editar</a>
+                    </button>
+                    <button type="button" class="btn btn-info fa fa-search">
+                        <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.UsuarioId">Detalhes</a>
+                    </button>
+                    <button type="button" class="btn btn-danger fa fa-trash">
+                        <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.UsuarioId">Excluir</a>
+                    </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

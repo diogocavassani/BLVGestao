@@ -5,18 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<button>
-    <a class="fa fa-plus" asp-action="Create">&emsp;Novo</a>
-</button>
-<table class="table">
+<div>
+    <h1 class="m-0 text-dark">Consulta Vendas</h1>
+</div>
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -41,40 +34,40 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Situacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormaDePagamento.Descricao)
-            </td>
-            <td>
-                <button type="button" class="btn btn-warning fa fa-pencil">
-                    <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.VendaId">Editar</a>
-                </button>
-                <button type="button" class="btn btn-info fa fa-search">
-                    <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.VendaId">Detalhes</a>
-                </button>
-                <button type="button" class="btn btn-danger fa fa-trash">
-                    <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.VendaId">Excluir</a>
-                </button>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Situacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormaDePagamento.Descricao)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning fa fa-pencil">
+                        <a class="text-white text-decoration-none" asp-action="Edit" asp-route-id="@item.VendaId">Editar</a>
+                    </button>
+                    <button type="button" class="btn btn-info fa fa-search">
+                        <a class="text-white text-decoration-none" asp-action="Details" asp-route-id="@item.VendaId">Detalhes</a>
+                    </button>
+                    <button type="button" class="btn btn-danger fa fa-trash">
+                        <a class="text-white text-decoration-none" asp-action="Delete" asp-route-id="@item.VendaId">Excluir</a>
+                    </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-</body>
-</html>
+
